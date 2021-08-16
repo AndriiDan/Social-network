@@ -1,0 +1,32 @@
+.app-audi {
+  display: grid;
+  width: 1200px;
+  margin: 0 auto;
+
+  grid-template-areas:
+   "h h"
+   "n c";
+
+   grid-template-rows: 60px 1fr;
+   grid-template-columns: 2fr 10fr;
+   grid-gap: 10px;
+}
+
+.header {
+  grid-area: h;
+  background-color: rgb(61, 179, 61);
+}
+
+.header img {
+  height: 50px;
+}
+
+.nav {
+  grid-area: n;
+  background-color: rgb(138, 150, 73);
+}
+
+.content {
+  grid-area: c;
+  background-color: rgb(60, 103, 160);
+}
