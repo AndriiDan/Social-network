@@ -12,14 +12,6 @@
    grid-gap: 10px;
 }
 
-.header {
-  grid-area: h;
-  background-color: rgb(61, 179, 61);
-}
-
-.header img {
-  height: 50px;
-}
 
 .nav {
   grid-area: n;
