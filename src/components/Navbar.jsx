@@ -6,7 +6,7 @@ const Navbar = () => {
     <div className={s.item}>
       <a>Profile</a>
     </div>
-    <div className={s.item}>
+    <div className={`${s.item} ${s.active}`}>
       <a>Message</a>
     </div>
     <div className={s.item}>
