@@ -2,3 +2,6 @@
   grid-area: c;
   background-color: rgb(60, 103, 160);
 }
+.item {
+  color: greenyellow;
+}
