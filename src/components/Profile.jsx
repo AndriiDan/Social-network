@@ -14,9 +14,9 @@ const Profile = () => {
         <div>
         New Post
         </div>
-      <div>
-        <div>post 1</div>
-        <div>post 2</div>
+      <div className="posts">
+        <div className="item">post 1</div>
+        <div className="item">post 2</div>
       </div>
     </div>
   </div>
