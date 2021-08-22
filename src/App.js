@@ -5,16 +5,12 @@ import Navbar from './components/Navbar/Navbar';
 import Profile from './components/Profile/Profile';
 
 const App = () => {
-    return ( <
-        div className = "app-audi" >
-        <
-        Header / >
-        <
-        Navbar / >
-        <
-        Profile / >
-        <
-        /div>
+    return (
+        <div className="app-audi" >
+            <Header />
+            <Navbar />
+            <Profile />
+        </div>
     );
 }
 
