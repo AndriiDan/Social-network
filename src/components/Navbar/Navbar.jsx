@@ -7,7 +7,7 @@ const Navbar = () => {
       <a href="/profile">Profile</a>
     </div>
     <div className={`${s.item} ${s.active}`}>
-      <a href="/dialogs">Message</a>
+      <a href="/dialogs">Messages</a>
     </div>
     <div className={s.item}>
       <a>News</a>
