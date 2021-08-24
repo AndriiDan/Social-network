@@ -2,39 +2,38 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import s from './Dialogs.module.css';
 
+const DialogItem = (props) => {
+    let path = '/dialogs/' + props.id;
+    return (
+        <div className={s.dialog}>
+            <NavLink to={path}>{props.name}</NavLink>
+        </div>
+    )
+}
+
+const Message = (props) => {
+    return (
+        <div className={s.message}>
+            {props.message}
+        </div>
+    )
+}
+
 const Dialogs = (props) => {
     return (
         <div className={s.dialogs}>
             <div className={s.dialogsItem}>
-                <div className={s.dialog}>
-                    <NavLink to='/dialogs/1'>Танька</NavLink>
-                </div>
-                <div className={s.dialog}>
-                    <NavLink to='/dialogs/2'>Сергій</NavLink>
-                </div>
-                <div className={s.dialog}>
-                    <NavLink to='/dialogs/3'>Толік</NavLink>
-                </div>
-                <div className={s.dialog}>
-                    <NavLink to='/dialogs/4'>Саша</NavLink>
-                </div>
-                <div className={s.dialog}>
-                    <NavLink to='/dialogs/5'>Вася</NavLink>
-                </div>
-                <div className={s.dialog + ' ' + s.active}>
-                    <NavLink to='/dialogs/6'>Dimych</NavLink>
-                </div>
+                <DialogItem name='Танька' id='1' />
+                <DialogItem name='Сергій' id='2' />
+                <DialogItem name='Толік' id='3' />
+                <DialogItem name='Саша' id='4' />
+                <DialogItem name='Вася' id='5' />
+                <DialogItem name='Dimych' id='6' />
             </div>
             <div className={s.messages}>
-                <div className={s.message}>
-                    Hi
-                </div>
-                <div className={s.message}>
-                    How is your ReactJS?
-                </div>
-                <div className={s.message}>
-                    Прогресує.
-                </div>
+                <Message message='Hi' />
+                <Message message='How is your ReactJS?' />
+                <Message message='Прогресує.' />
             </div>
         </div>
     )
