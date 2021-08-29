@@ -16,6 +16,21 @@ const App = () => {
         { id: 2, message: 'It\'s my first post.', likesCount: 20 }
     ]
 
+    let dialogs = [
+        { id: 1, name: 'Танька' },
+        { id: 2, name: 'Сергій' },
+        { id: 3, name: 'Толік' },
+        { id: 4, name: 'Саша' },
+        { id: 5, name: 'Вася' },
+        { id: 6, name: 'Dimych' }
+    ]
+
+    let messages = [
+        { id: 1, message: 'Hi' },
+        { id: 2, message: 'How is your ReactJS?' },
+        { id: 3, message: 'Прогресує.' }
+    ]
+
     return (
         <BrowserRouter>
             <div className="app-audi" >
@@ -23,7 +38,7 @@ const App = () => {
                 <Navbar />
                 <div className="app-audi-content">
                     <Route path='/profile' render={() => <Profile posts={posts} />} />
-                    <Route path='/dialogs' render={() => <Dialogs />} />
+                    <Route path='/dialogs' render={() => <Dialogs dialogs={dialogs} messages={messages} />} />
 
                     {/* <Route path='/profile' component={Profile} />
                     <Route path='/dialogs' component={Dialogs} /> */}
