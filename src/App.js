@@ -10,13 +10,19 @@ import Profile from './components/Profile/Profile';
 import Settings from './components/Settings/Settings';
 
 const App = () => {
+
+    let posts = [
+        { id: 1, message: 'Hi, how are you?', likesCount: 15 },
+        { id: 2, message: 'It\'s my first post.', likesCount: 20 }
+    ]
+
     return (
         <BrowserRouter>
             <div className="app-audi" >
                 <Header />
                 <Navbar />
                 <div className="app-audi-content">
-                    <Route path='/profile' render={() => <Profile />} />
+                    <Route path='/profile' render={() => <Profile posts={posts} />} />
                     <Route path='/dialogs' render={() => <Dialogs />} />
 
                     {/* <Route path='/profile' component={Profile} />
