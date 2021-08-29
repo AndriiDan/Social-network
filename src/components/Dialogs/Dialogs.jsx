@@ -3,10 +3,10 @@ import DialogItem from './DialogItem/DialogItem';
 import s from './Dialogs.module.css';
 import Message from './Message/Message';
 
-<div>
+{/* <div>
     <DialogItem />
     <Message />
-</div>
+</div> */}
 const Dialogs = (props) => {
 
     let dialogs = [
