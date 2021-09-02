@@ -16,11 +16,8 @@ const App = (props) => {
                 <Header />
                 <Navbar />
                 <div className="app-audi-content">
-                    <Route path='/profile' render={() => <Profile posts={props.posts} />} />
-                    <Route path='/dialogs' render={() => <Dialogs dialogs={props.dialogs} messages={props.messages} />} />
-
-                    {/* <Route path='/profile' component={Profile} />
-                    <Route path='/dialogs' component={Dialogs} /> */}
+                    <Route path='/profile' render={() => <Profile posts={props.state.posts} />} />
+                    <Route path='/dialogs' render={() => <Dialogs dialogs={props.state.dialogs} messages={props.state.messages} />} />
                     <Route path='/news' component={News} />
                     <Route path='/music' component={Music} />
                     <Route path='/settings' component={Settings} />
