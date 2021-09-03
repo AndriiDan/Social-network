@@ -1,0 +1,9 @@
+.friends3 {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+.friendsPage {
+    font-size: 1.5em;
+    margin: 1em 0 0.5em 0;
+}
