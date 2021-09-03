@@ -19,7 +19,8 @@ let state = {
             { id: 2, message: 'How is your ReactJS?' },
             { id: 3, message: 'Прогресує.' }
         ]
-    }
+    },
+    sidebar: {}
 }
 
 export default state;

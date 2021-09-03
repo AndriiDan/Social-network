@@ -8,6 +8,7 @@ import Navbar from './components/Navbar/Navbar';
 import News from './components/News/News';
 import Profile from './components/Profile/Profile';
 import Settings from './components/Settings/Settings';
+import Friends from './components/Friends/Friends';
 
 const App = (props) => {
     return (
@@ -21,6 +22,7 @@ const App = (props) => {
                     <Route path='/news' component={News} />
                     <Route path='/music' component={Music} />
                     <Route path='/settings' component={Settings} />
+                    <Route path='/friends' component={Friends} />
                 </div>
             </div>
         </BrowserRouter>
