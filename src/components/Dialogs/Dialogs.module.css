@@ -1,6 +1,6 @@
 .dialogs {
     display: grid;
-    grid-template-columns: 2fr 10fr;
+    grid-template-columns: 2fr 5fr 5fr;
 }
 
 
@@ -14,9 +14,15 @@
 
 /* .dialog {} */
 
-.messages {
+.messages1 {
     padding: 10px;
     color: white;
+    text-align: left;
+}
+
+.messages2 {
+    padding: 10px;
+    text-align: right;
 }
 
 /* s.message {} */
