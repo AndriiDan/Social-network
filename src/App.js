@@ -11,11 +11,18 @@ import Settings from './components/Settings/Settings';
 import Friends from './components/Friends/Friends';
 
 const App = (props) => {
+
+    // let friends = [
+    //     { id: 1, name: 'Танька' },
+    //     { id: 2, name: 'Сергій' },
+    //     { id: 3, name: 'Толік' }
+    // ]
+
     return (
         <BrowserRouter>
             <div className="app-audi" >
                 <Header />
-                <Navbar />
+                <Navbar state={props.state.sidebar} />
                 <div className="app-audi-content">
                     <Route path='/profile' render={() => <Profile state={props.state.profilePage} />} />
                     <Route path='/dialogs' render={() => <Dialogs state={props.state.dialogsPage} />} />

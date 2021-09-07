@@ -20,7 +20,13 @@ let state = {
             { id: 3, message: 'Прогресує.' }
         ]
     },
-    sidebar: {}
+    sidebar: {
+        friends: [
+            { id: 1, name: 'Танька' },
+            { id: 2, name: 'Сергій' },
+            { id: 3, name: 'Толік' }
+        ]
+    }
 }
 
 export default state;

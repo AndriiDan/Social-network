@@ -3,7 +3,14 @@ import { NavLink } from 'react-router-dom';
 import FriendsPage from './FriendsPage/FriendsPage';
 import s from './Navbar.module.css';
 
-const Navbar = () => {
+const Navbar = (props) => {
+
+  // let friends = [
+  //   { id: 1, name: 'Танька' },
+  //   { id: 2, name: 'Сергій' },
+  //   { id: 3, name: 'Толік' }
+  // ]
+
   return (
     <nav className={s.nav}>
       <div className={s.item}>
@@ -22,7 +29,7 @@ const Navbar = () => {
         <NavLink to="/settings" activeClassName={s.activeLink}>Settings</NavLink>
       </div>
       <div className={s.item}>
-        <NavLink to='/friends' activeClassName={s.activeLink}><FriendsPage /></NavLink>
+        <NavLink to='/friends' activeClassName={s.activeLink}><FriendsPage friends={props.state.friends} /></NavLink>
       </div>
     </nav>
   )
