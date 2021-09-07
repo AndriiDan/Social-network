@@ -3,6 +3,12 @@
     grid-template-columns: 2fr 5fr 5fr;
 }
 
+.dialog img {
+    width: 20px;
+    border-radius: 45px;
+    margin-right: 10px;
+}
+
 
 .dialogsItem {
     padding: 10px;
