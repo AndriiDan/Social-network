@@ -25,4 +25,10 @@
     text-align: right;
 }
 
+.message img {
+    width: 20px;
+    border-radius: 45px;
+    margin-right: 8px;
+}
+
 /* s.message {} */
