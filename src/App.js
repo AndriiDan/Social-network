@@ -1,5 +1,5 @@
 // import React, { Component } from 'react';
-import { BrowserRouter, Route } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 import './App.css';
 import Dialogs from './components/Dialogs/Dialogs';
 import Header from './components/Header/Header';
@@ -19,20 +19,18 @@ const App = (props) => {
     // ]
 
     return (
-        <BrowserRouter>
-            <div className="app-audi" >
-                <Header />
-                <Navbar state={props.state.sidebar} />
-                <div className="app-audi-content">
-                    <Route path='/profile' render={() => <Profile state={props.state.profilePage} />} />
-                    <Route path='/dialogs' render={() => <Dialogs state={props.state.dialogsPage} />} />
-                    <Route path='/news' component={News} />
-                    <Route path='/music' component={Music} />
-                    <Route path='/settings' component={Settings} />
-                    <Route path='/friends' component={Friends} />
-                </div>
+        <div className="app-audi" >
+            <Header />
+            <Navbar state={props.state.sidebar} />
+            <div className="app-audi-content">
+                <Route path='/profile' render={() => <Profile state={props.state.profilePage} />} />
+                <Route path='/dialogs' render={() => <Dialogs state={props.state.dialogsPage} />} />
+                <Route path='/news' component={News} />
+                <Route path='/music' component={Music} />
+                <Route path='/settings' component={Settings} />
+                <Route path='/friends' component={Friends} />
             </div>
-        </BrowserRouter>
+        </div>
     );
 }
 
