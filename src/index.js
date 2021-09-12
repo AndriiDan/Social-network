@@ -7,12 +7,12 @@ import state from './redux/state';
 import { addPost } from './redux/state';
 import { BrowserRouter } from 'react-router-dom';
 
-addPost('samuraijs.com');
+// addPost('samuraijs.com');
 
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
-      <App state={state} />
+      <App state={state} addPost={addPost} />
     </BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root')
