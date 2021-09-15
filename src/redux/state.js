@@ -40,6 +40,7 @@ export let addPost = () => {
     };
 
     state.profilePage.posts.push(newPost);
+    state.profilePage.newPostText = '';
     rerenderEntireTree(state);
 }
 
