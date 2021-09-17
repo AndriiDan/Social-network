@@ -17,7 +17,7 @@ const App = (props) => {
     //     { id: 2, name: 'Сергій' },
     //     { id: 3, name: 'Толік' }
     // ]
-
+    debugger;
     return (
         <div className="app-audi" >
             <Header />
