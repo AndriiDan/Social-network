@@ -17,7 +17,6 @@ const App = (props) => {
     //     { id: 2, name: 'Сергій' },
     //     { id: 3, name: 'Толік' }
     // ]
-    debugger;
     return (
         <div className="app-audi" >
             <Header />
@@ -27,8 +26,10 @@ const App = (props) => {
                     render={() =>
                         <Profile
                             profilePage={props.state.profilePage}
-                            updateNewPostText={props.updateNewPostText}
-                            addPost={props.addPost} />} />
+                            // updateNewPostText={props.updateNewPostText}
+                            // addPost={props.addPost} 
+                            dispatch={props.dispatch}
+                        />} />
                 <Route path='/dialogs'
                     render={() =>
                         <Dialogs
