@@ -11,12 +11,7 @@ import Settings from './components/Settings/Settings';
 import Friends from './components/Friends/Friends';
 
 const App = (props) => {
-
-    // let friends = [
-    //     { id: 1, name: 'Танька' },
-    //     { id: 2, name: 'Сергій' },
-    //     { id: 3, name: 'Толік' }
-    // ]
+    debugger;
     return (
         <div className="app-audi" >
             <Header />
@@ -30,10 +25,7 @@ const App = (props) => {
                         />} />
                 <Route path='/dialogs'
                     render={() =>
-                        <Dialogs
-                            // state={props.state.dialogsPage}
-                            // dispatch={props.dispatch}
-                            store={props.store} />} />
+                        <Dialogs store={props.store} />} />
                 <Route path='/news' component={News} />
                 <Route path='/music' component={Music} />
                 <Route path='/settings' component={Settings} />
