@@ -17,11 +17,7 @@ const App = (props) => {
             <Navbar state={props.state.sidebar} />
             <div className="app-audi-content">
                 <Route path='/profile'
-                    render={() =>
-                        <Profile
-                            profilePage={props.state.profilePage}
-                            dispatch={props.dispatch}
-                        />} />
+                    render={() => <Profile store={props.store} />} />
                 <Route path='/dialogs'
                     render={() =>
                         <Dialogs
