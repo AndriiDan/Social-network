@@ -5,15 +5,10 @@ import s from './Navbar.module.css';
 
 const Navbar = (props) => {
 
-  // let friends = [
-  //   { id: 1, name: 'Танька' },
-  //   { id: 2, name: 'Сергій' },
-  //   { id: 3, name: 'Толік' }
-  // ]
-
   return (
     <nav className={s.nav}>
       <div className={s.item}>
+        {/* NavLink - щоб змінювалися url без перезавантаження сторінки, коли Route (в App.js) побачать зміну url, то виконають свій render */}
         <NavLink to="/profile" activeClassName={s.activeLink}>Profile</NavLink>
       </div>
       <div className={`${s.item} ${s.active}`}>

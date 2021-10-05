@@ -2,62 +2,26 @@ import React from 'react';
 import DialogItem from './DialogItem/DialogItem';
 import s from './Dialogs.module.css';
 import Message from './Message/Message';
-// import { addMessageActionCreator, sendMessageCreator, updateNewMessageBodyCreator, updateNewMessageTextActionCreator } from './../../redux/state';
-import { updateNewMessageBodyCreator, sendMessageCreator } from './../../redux/dialogs-reducer';
-
-
 
 const Dialogs = (props) => {
-    let state = props.store.getState().dialogsPage;
+    let state = props.dialogsPage;
 
     let dialogsElements = state.dialogs.map(d => <DialogItem name={d.name} id={d.id} />)
     let messagesElements = state.messages.map(m => <Message message={m.message} />)
 
+    // Приходить з state
     let newMessageBody = state.newMessageBody;
 
+    // коли відбулася подія. іде в BLL - далі з BLL приходить новий value (newMessageBody)
     let onSendMessageClick = () => {
-        props.store.dispatch(sendMessageCreator());
+        props.sendMessage();
     }
     let onNewMessageChange = (e) => {
         let body = e.target.value;
-        props.store.dispatch(updateNewMessageBodyCreator(body));
+        props.updateNewMessageBody(body);
     }
 
-    // let newMessageElement = React.createRef();
-    // let addMessage = () => {
-    //     props.dispatch(addMessageActionCreator());
-    // }
-
-    // let onMessageChange = () => {
-    //     let text = newMessageElement.current.value;
-    //     props.dispatch(updateNewMessageTextActionCreator(text));
-    // }
-
     return (
-        // <div>
-        //     <div className={s.dialogs}>
-        //         <div className={s.dialogsItem}>
-        //             {dialogsElements}
-        //         </div>
-        //         {/* <div className={s.messages1}>
-        //             {MessagesElements}
-        //         </div>
-        //         <div className={s.messages2}>
-        //             {MessagesElements}
-        //         </div> */}
-        //     </div>
-        //     <div>
-        //         <div>
-        //             <textarea
-        //                 ref={newMessageElement}
-        //                 onChange={onMessageChange}
-        //                 value={props.state.newMessageText} />
-        //         </div>
-        //         <div>
-        //             <button onClick={addMessage}>Add message</button>
-        //         </div>
-        //     </div>
-        // </div>
         <div className={s.dialogs}>
             <div className={s.dialogsElements}>
                 {dialogsElements}
@@ -65,10 +29,15 @@ const Dialogs = (props) => {
             <div className={s.messages}>
                 <div>{messagesElements}</div>
                 <div>
-                    <div><textarea value={newMessageBody}
-                        onChange={onNewMessageChange}
-                        placeholder='Enter your message'></textarea></div>
-                    <div><button onClick={onSendMessageClick}>Send</button></div>
+                    <div>
+                        <textarea value={newMessageBody}
+                            // щоб змінювалося value, необхідний onChange (приходить з BLL)
+                            onChange={onNewMessageChange}
+                            placeholder='Enter your message'></textarea>
+                    </div>
+                    <div>
+                        <button onClick={onSendMessageClick}>Send</button>
+                    </div>
                 </div>
             </div>
         </div>
