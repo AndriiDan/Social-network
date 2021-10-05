@@ -11,12 +11,6 @@ import Settings from './components/Settings/Settings';
 import Friends from './components/Friends/Friends';
 
 const App = (props) => {
-
-    // let friends = [
-    //     { id: 1, name: 'Танька' },
-    //     { id: 2, name: 'Сергій' },
-    //     { id: 3, name: 'Толік' }
-    // ]
     return (
         <div className="app-audi" >
             <Header />
