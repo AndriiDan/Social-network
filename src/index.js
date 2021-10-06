@@ -5,7 +5,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import { BrowserRouter } from 'react-router-dom';
-import StoreContext from './StoreContext';
+import { Provider } from './StoreContext';
 
 // rerenderEntireTree відмальвує App кожного разу, коли в store(state) відбулися зміни 
 let rerenderEntireTree = (state) => {
@@ -13,13 +13,13 @@ let rerenderEntireTree = (state) => {
         <React.StrictMode>
             {/* Все, що в середині BrowserRouter може переключатися (підключати різні зсилки, змінювати url) без перезавантаження сторінки */}
             <BrowserRouter>
-                <StoreContext.Provider value={store}>
+                <Provider store={store}>
                     <App
-                        // state={state}
-                        // dispatch={store.dispatch.bind(store)}
-                        // store={store}
+                    // state={state}
+                    // dispatch={store.dispatch.bind(store)}
+                    // store={store}
                     />
-                </StoreContext.Provider>
+                </Provider>
             </BrowserRouter>
         </React.StrictMode>,
         document.getElementById('root')

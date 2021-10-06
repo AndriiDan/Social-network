@@ -3,7 +3,7 @@ import { updateNewMessageBodyCreator, sendMessageCreator } from '../../redux/dia
 import StoreContext from '../../StoreContext';
 import Dialogs from './Dialogs';
 
-const DialogsContainer = (props) => {
+const DialogsContainer = () => {
 
 
     return (

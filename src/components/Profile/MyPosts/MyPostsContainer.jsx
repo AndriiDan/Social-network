@@ -3,7 +3,7 @@ import { addPostActionCreator, updateNewPostTextActionCreator } from '../../../r
 import StoreContext from '../../../StoreContext';
 import MyPosts from './MyPosts';
 
-const MyPostsContainer = (props) => {
+const MyPostsContainer = () => {
 
   return (
     <StoreContext.Consumer>
