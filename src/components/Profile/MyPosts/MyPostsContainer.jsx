@@ -21,7 +21,7 @@ let mapDispatchToProps = (dispatch) => {
   }
 }
 
-const MyPostContainer = connect(mapStateToProps, mapDispatchTpProps)(MyPosts);
+const MyPostsContainer = connect(mapStateToProps, mapDispatchToProps)(MyPosts);
 
 // const MyPostsContainer = () => {
 
