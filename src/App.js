@@ -15,23 +15,17 @@ const App = (props) => {
     return (
         <div className="app-audi" >
             <Header />
-            <Navbar
-            // state={props.state.sidebar} 
-            />
+            <Navbar />
             <div className="app-audi-content">
                 {/* Route - спеціальні компоненти, які слідкують за url (path='/profile'), якщо url підходить, то виконує render */}
                 <Route
                     path='/profile'
                     render={() =>
-                        <Profile
-                        // store={props.store} 
-                        />} />
+                        <Profile />} />
                 <Route
                     path='/dialogs'
                     render={() =>
-                        <DialogsContainer
-                        // store={props.store}
-                        />} />
+                        <DialogsContainer />} />
                 <Route path='/news' component={News} />
                 <Route path='/music' component={Music} />
                 <Route path='/settings' component={Settings} />

@@ -13,11 +13,7 @@ ReactDOM.render(
         {/* Все, що в середині BrowserRouter може переключатися (підключати різні зсилки, змінювати url) без перезавантаження сторінки */}
         <BrowserRouter>
             <Provider store={store}>
-                <App
-                // state={state}
-                // dispatch={store.dispatch.bind(store)}
-                // store={store}
-                />
+                <App />
             </Provider>
         </BrowserRouter>
     </React.StrictMode>,
