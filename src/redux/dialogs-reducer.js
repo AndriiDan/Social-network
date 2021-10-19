@@ -22,14 +22,18 @@ const dialogsReducer = (state = initialState, action) => {
     switch (action.type) {
         case UPDATE_NEW_MESSAGE_BODY:
             return {
+                // // створюю копію state
                 ...state,
                 newMessageBody: action.body
             };
         case SEND_MESSAGE:
             let body = state.newMessageBody;
             return {
+                // створюю копію state
                 ...state,
+                // створюю копію messages і додаю в кінець нове повідомлення (аналогічно як push)
                 messages: [...state.messages, { id: 4, message: body }],
+                // обнуляю поле вводу
                 newMessageBody: ''
             };
         default:

@@ -14,7 +14,13 @@ let initialState = {
 
 const profileReducer = (state = initialState, action) => {
     switch (action.type) {
-        case ADD_POST: {
+        case UPDATE_NEW_POST_TEXT:
+            return {
+                // створюю копію state
+                ...state,
+                newPostText: action.newText
+            }
+        case ADD_POST:
             // формує новий пост за зразком posts-масиву
             let newPost = {
                 id: 3,
@@ -22,19 +28,14 @@ const profileReducer = (state = initialState, action) => {
                 message: state.newPostText,
                 likesCount: 0
             };
-            let stateCopy = { ...state };
-            // додає новий пост в кінець масиву
-            stateCopy.posts = [...stateCopy.posts];
-            stateCopy.posts.push(newPost);
-            // обнуляє поле вводу після додавання поста
-            stateCopy.newPostText = '';
-            return stateCopy;
-        }
-        case UPDATE_NEW_POST_TEXT: {
-            let stateCopy = { ...state };
-            stateCopy.newPostText = action.newText;
-            return stateCopy;
-        }
+            return {
+                // створюю копію state
+                ...state,
+                // створюю копію posts і додаю в кінець новий пост (аналогічно як push)
+                posts: [...state.posts, newPost],
+                // обнуляю поле вводу
+                newPostText: ''
+            }
         default:
             return state;
     }
