@@ -1,6 +1,7 @@
 // використовуємо константи замість рядків для мінімізації помилки в написання
 const FOLLOW = 'FOLLOW';
 const UNFOLLOW = 'UNFOLLOW';
+const SET_USERS = 'SET_USERS';
 
 // Для першого запуску profileReducer
 let initialState = {
@@ -33,6 +34,12 @@ const usersReducer = (state = initialState, action) => {
                     return u;
                 })
             };
+        case SET_USERS: {
+            return {
+                ...state,
+                users: [...state.users, ...action.users]
+            }
+        }
         default:
             return state;
     }
@@ -43,6 +50,9 @@ export const followAC = (userId) => ({
 })
 export const unfollowAC = (userId) => ({
     type: UNFOLLOW, userId
+})
+export const setUsersAC = (users) => ({
+    type: SET_USERS, users
 })
 
 export default usersReducer;
