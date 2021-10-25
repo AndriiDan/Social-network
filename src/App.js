@@ -9,7 +9,7 @@ import Profile from './components/Profile/Profile';
 import Settings from './components/Settings/Settings';
 import Friends from './components/Friends/Friends';
 import DialogsContainer from './components/Dialogs/DialogsContainer';
-import Users from './components/Users/Users';
+import UsersContainer from './components/Users/UsersContainer';
 
 const App = (props) => {
     debugger;
@@ -32,7 +32,7 @@ const App = (props) => {
                 <Route path='/settings' component={Settings} />
                 <Route
                     path='/users'
-                    render={() => <Users />} />
+                    render={() => <UsersContainer />} />
                 <Route path='/friends' component={Friends} />
             </div>
         </div>
