@@ -39,10 +39,7 @@ const usersReducer = (state = initialState, action) => {
         case SET_USERS: {
             return {
                 ...state,
-                users: [
-                    // якщо розкоментувати, то 2 рази вводить одних і тих users
-                    // ...state.users,
-                    ...action.users]
+                users: action.users
             };
         }
         case SET_CURRENT_PAGE: {

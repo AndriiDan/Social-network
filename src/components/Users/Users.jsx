@@ -12,6 +12,14 @@ class Users extends React.Component {
         });
     }
 
+    // метод, для обробника подій onClick - для зміни номера сторінки users, + запит на сервер 
+    onPageChanged = (pageNumber) => {
+        { this.props.setCurrentPage(pageNumber) };
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`).then(response => {
+            this.props.setUsers(response.data.items)
+        });
+    }
+
     render() {
 
         // інформація, про загальну к-сть сторінок
@@ -28,16 +36,14 @@ class Users extends React.Component {
             <div>
                 {/* сформовуємо рядок з номерацією сторінок */}
                 {pages.map(p => {
-                    return <span className={this.props.currentPage === p && styles.selectedPage}
-                    onClick ={ () => {this.props.setCurrentPage(p)}}>{p}</span>
+                    return <span
+                        // виділяє активну сторінку
+                        className={this.props.currentPage === p && styles.selectedPage}
+                        // перемикає сторінку з юзерами
+                        onClick={() => { this.onPageChanged(p) }}>
+                        {p}
+                    </span>
                 })}
-
-                {/* <span>1</span>
-                <span className={styles.selectedPage}>2</span>
-                <span>3</span>
-                <span>4</span>
-                <span>5</span> */}
-
             </div>
             {
                 this.props.users.map(u =>
