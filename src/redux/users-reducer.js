@@ -3,13 +3,15 @@ const FOLLOW = 'FOLLOW';
 const UNFOLLOW = 'UNFOLLOW';
 const SET_USERS = 'SET_USERS';
 const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE';
+const SET_TOTAL_USERS_COUNT = 'SET_TOTAL_USERS_COUNT';
 
 // Для першого запуску profileReducer
 let initialState = {
     users: [],
-    // додамо к-сть юзерів на сторінці (pageSize) та загальну к-сть юзерів (totalUsersCount)
+    // к-сть юзерів на сторінці 
     pageSize: 5,
-    totalUsersCount: 21,
+    // загальну к-сть юзерів
+    totalUsersCount: 0,
     // текуча сторінка
     currentPage: 2
 }
@@ -48,6 +50,12 @@ const usersReducer = (state = initialState, action) => {
                 currentPage: action.currentPage
             };
         }
+        case SET_TOTAL_USERS_COUNT: {
+            return {
+                ...state,
+                totalUsersCount: action.count
+            };
+        }
         default:
             return state;
     }
@@ -64,6 +72,9 @@ export const setUsersAC = (users) => ({
 })
 export const setCurrentPageAC = (currentPage) => ({
     type: SET_CURRENT_PAGE, currentPage
+})
+export const setUsersTotalCountAC = (totalUsersCount) => ({
+    type: SET_TOTAL_USERS_COUNT, count: totalUsersCount
 })
 
 export default usersReducer;
