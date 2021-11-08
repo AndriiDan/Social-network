@@ -8,7 +8,7 @@ let initialState = {
     users: [],
     // додамо к-сть юзерів на сторінці (pageSize) та загальну к-сть юзерів (totalUsersCount)
     pageSize: 5,
-    totalUsersCount: 18,
+    totalUsersCount: 21,
     // текуча сторінка
     currentPage: 2
 }
