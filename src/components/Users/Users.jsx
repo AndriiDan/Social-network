@@ -13,13 +13,30 @@ class Users extends React.Component {
     }
 
     render() {
+
+        // інформація, про загальну к-сть сторінок
+        let pagesCount = this.props.totalUsersCount / this.props.pageSize;
+
+        // створюємо масив сторінок
+        let pages = [];
+        // формуємо масив сторінок
+        for (let i = 1; i <= pagesCount; i++) {
+            pages.push(i);
+        }
+
         return <div>
             <div>
-                <span>1</span>
+                {/* сформовуємо рядок з номерацією сторінок */}
+                {pages.map(p => {
+                    return <span className={this.props.currentPage === p && styles.selectedPage}>{p}</span>
+                })}
+
+                {/* <span>1</span>
                 <span className={styles.selectedPage}>2</span>
                 <span>3</span>
                 <span>4</span>
-                <span>5</span>
+                <span>5</span> */}
+
             </div>
             {
                 this.props.users.map(u =>

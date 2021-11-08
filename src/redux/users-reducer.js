@@ -5,7 +5,12 @@ const SET_USERS = 'SET_USERS';
 
 // Для першого запуску profileReducer
 let initialState = {
-    users: []
+    users: [],
+    // додамо к-сть юзерів на сторінці (pageSize) та загальну к-сть юзерів (totalUsersCount)
+    pageSize: 5,
+    totalUsersCount: 20,
+    // текуча сторінка
+    currentPage: 2
 }
 
 const usersReducer = (state = initialState, action) => {
