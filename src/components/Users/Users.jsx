@@ -15,7 +15,7 @@ class Users extends React.Component {
     render() {
 
         // інформація, про загальну к-сть сторінок
-        let pagesCount = this.props.totalUsersCount / this.props.pageSize;
+        let pagesCount = Math.ceil(this.props.totalUsersCount / this.props.pageSize);
 
         // створюємо масив сторінок
         let pages = [];
