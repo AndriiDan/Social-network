@@ -28,7 +28,8 @@ class Users extends React.Component {
             <div>
                 {/* сформовуємо рядок з номерацією сторінок */}
                 {pages.map(p => {
-                    return <span className={this.props.currentPage === p && styles.selectedPage}>{p}</span>
+                    return <span className={this.props.currentPage === p && styles.selectedPage}
+                    onClick ={ () => {this.props.setCurrentPage(p)}}>{p}</span>
                 })}
 
                 {/* <span>1</span>
