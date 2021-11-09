@@ -22,7 +22,7 @@ let Users = (props) => {
                     // виділяє активну сторінку
                     className={props.currentPage === p && styles.selectedPage}
                     // перемикає сторінку з юзерами
-                    onClick={() => { onPageChanged(p) }}>
+                    onClick={() => { props.onPageChanged(p) }}>
                     {p}
                 </span>
             })}
