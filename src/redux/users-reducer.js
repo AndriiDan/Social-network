@@ -13,7 +13,7 @@ let initialState = {
     // загальну к-сть юзерів
     totalUsersCount: 0,
     // текуча сторінка
-    currentPage: 2
+    currentPage: 1
 }
 
 const usersReducer = (state = initialState, action) => {
