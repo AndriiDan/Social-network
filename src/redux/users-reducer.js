@@ -50,6 +50,7 @@ const usersReducer = (state = initialState, action) => {
                 currentPage: action.currentPage
             };
         }
+        // підмінюємо загальну к-сть користовачів
         case SET_TOTAL_USERS_COUNT: {
             return {
                 ...state,
@@ -67,12 +68,15 @@ export const followAC = (userId) => ({
 export const unfollowAC = (userId) => ({
     type: UNFOLLOW, userId
 })
+// засетити всіх юзерів
 export const setUsersAC = (users) => ({
     type: SET_USERS, users
 })
+// засетити текучу сторінку
 export const setCurrentPageAC = (currentPage) => ({
     type: SET_CURRENT_PAGE, currentPage
 })
+// засетити к-сть всіх юзерів
 export const setUsersTotalCountAC = (totalUsersCount) => ({
     type: SET_TOTAL_USERS_COUNT, count: totalUsersCount
 })
