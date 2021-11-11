@@ -13,7 +13,9 @@ let initialState = {
     // загальну к-сть юзерів
     totalUsersCount: 0,
     // текуча сторінка
-    currentPage: 1
+    currentPage: 1,
+    // для відображення анімації при оновленні або запиті
+    isFatching: true
 }
 
 const usersReducer = (state = initialState, action) => {
