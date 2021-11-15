@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { followAC, setCurrentPageAC, setUsersAC, setUsersTotalCountAC, unfollowAC } from '../../redux/users-reducer';
+import { followAC, setCurrentPageAC, setUsersAC, setUsersTotalCountAC, toggleIsFetchingAC, unfollowAC } from '../../redux/users-reducer';
 import Users from './Users';
 import * as axios from 'axios';
 import preloader from './../../assets/images/preloader.gif';
@@ -9,7 +9,11 @@ import styles from "./Users.module.css";
 class UsersContainer extends React.Component {
 
     componentDidMount() {
+        // для відображення анімації при відправленні запиту
+        this.props.toggleIsFetching(true);
         axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`).then(response => {
+            // для завершення відображення анімації після запиту   
+            this.props.toggleIsFetching(false);
             // засетити users
             this.props.setUsers(response.data.items);
             // засетити загальну к-сть юзерів
@@ -19,15 +23,19 @@ class UsersContainer extends React.Component {
 
     // метод, для обробника подій onClick - для зміни номера сторінки users, + запит на сервер 
     onPageChanged = (pageNumber) => {
-        { this.props.setCurrentPage(pageNumber) };
+        // для відображення анімації при відправленні запиту
+        this.props.toggleIsFetching(true);
+        this.props.setCurrentPage(pageNumber);
         axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`).then(response => {
-            this.props.setUsers(response.data.items)
+            this.props.setUsers(response.data.items);
+            // для завершення відображення анімації після запиту
+            this.props.toggleIsFetching(false);
         });
     }
 
     render() {
         return <>
-            {this.props.isFatching ? <img className={styles.preloader} src={preloader} /> : null}
+            {this.props.isFetching ? <img className={styles.preloader} src={preloader} /> : null}
             <Users
                 totalUsersCount={this.props.totalUsersCount}
                 pageSize={this.props.pageSize}
@@ -48,7 +56,7 @@ let mapStateToProps = (state) => {
         pageSize: state.usersPage.pageSize,
         totalUsersCount: state.usersPage.totalUsersCount,
         currentPage: state.usersPage.currentPage,
-        isFatching: state.usersPage.isFatching
+        isFetching: state.usersPage.isFetching
     }
 }
 
@@ -68,6 +76,9 @@ let mapDispatchToProps = (dispatch) => {
         },
         setTotalUsersCount: (totalCount) => {
             dispatch(setUsersTotalCountAC(totalCount));
+        },
+        toggleIsFetching: (isFetching) => {
+            dispatch(toggleIsFetchingAC(isFetching));
         }
     }
 }

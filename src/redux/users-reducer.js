@@ -4,6 +4,7 @@ const UNFOLLOW = 'UNFOLLOW';
 const SET_USERS = 'SET_USERS';
 const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE';
 const SET_TOTAL_USERS_COUNT = 'SET_TOTAL_USERS_COUNT';
+const TOGGLE_IS_FETCHING = 'TOGGLE_IS_FETCHING';
 
 // Для першого запуску profileReducer
 let initialState = {
@@ -15,7 +16,7 @@ let initialState = {
     // текуча сторінка
     currentPage: 1,
     // для відображення анімації при оновленні або запиті
-    isFatching: true
+    isFetching: true
 }
 
 const usersReducer = (state = initialState, action) => {
@@ -59,6 +60,13 @@ const usersReducer = (state = initialState, action) => {
                 totalUsersCount: action.count
             };
         }
+        // для анімації при оновленні або запиті
+        case TOGGLE_IS_FETCHING: {
+            return {
+                ...state,
+                isFetching: action.isFetching
+            };
+        }
         default:
             return state;
     }
@@ -81,6 +89,10 @@ export const setCurrentPageAC = (currentPage) => ({
 // засетити к-сть всіх юзерів
 export const setUsersTotalCountAC = (totalUsersCount) => ({
     type: SET_TOTAL_USERS_COUNT, count: totalUsersCount
+})
+// для відображення анімації при оновленні або запиті
+export const toggleIsFetchingAC = (isFetching) => ({
+    type: TOGGLE_IS_FETCHING, isFetching
 })
 
 export default usersReducer;
