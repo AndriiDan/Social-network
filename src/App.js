@@ -5,11 +5,11 @@ import Header from './components/Header/Header';
 import Music from './components/Music/Music';
 import Navbar from './components/Navbar/Navbar';
 import News from './components/News/News';
-import Profile from './components/Profile/Profile';
 import Settings from './components/Settings/Settings';
 import Friends from './components/Friends/Friends';
 import DialogsContainer from './components/Dialogs/DialogsContainer';
 import UsersContainer from './components/Users/UsersContainer';
+import ProfileContainer from './components/Profile/ProfileContainer';
 
 const App = (props) => {
     return (
@@ -21,7 +21,7 @@ const App = (props) => {
                 <Route
                     path='/profile'
                     render={() =>
-                        <Profile />} />
+                        <ProfileContainer />} />
                 <Route
                     path='/dialogs'
                     render={() =>
