@@ -1,6 +1,7 @@
 // використовуємо константи замість рядків для мінімізації помилки в написання
 const ADD_POST = 'ADD-POST';
 const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
+const SET_USER_PROFILE = 'SET_USER_PROFILE';
 
 // Для першого запуску profileReducer
 let initialState = {
@@ -9,7 +10,8 @@ let initialState = {
         { id: 2, message: 'It\'s my first post.', likesCount: 20 }
     ],
     // стартове значення в полі вводу в text
-    newPostText: 'it-kamasutra.com'
+    newPostText: 'it-kamasutra.com',
+    profile: null
 }
 
 const profileReducer = (state = initialState, action) => {
@@ -36,6 +38,8 @@ const profileReducer = (state = initialState, action) => {
                 // обнуляю поле вводу
                 newPostText: ''
             }
+        case SET_USER_PROFILE:
+            return { ...state, profile: action.profile }
         default:
             return state;
     }
@@ -46,5 +50,9 @@ export const addPostActionCreator = () => ({
 })
 export const updateNewPostTextActionCreator = (text) =>
     ({ type: UPDATE_NEW_POST_TEXT, newText: text })
+
+export const setUserProfile = (profile) => ({
+    type: SET_USER_PROFILE, profile
+})
 
 export default profileReducer;
