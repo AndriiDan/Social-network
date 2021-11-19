@@ -14,6 +14,19 @@ const ProfileInfo = (props) => {
       </div>
       <div className={s.descriptionBlock}>
         <img src={props.profile.photos.large} />
+        <div>Про мене: {props.profile.aboutMe}</div>
+        <div>Мої контакти:
+          <div>{props.profile.contacts.facebook}</div>
+          <div>{props.profile.contacts.website}</div>
+          <div>{props.profile.contacts.vk}</div>
+          <div>{props.profile.contacts.twitter}</div>
+          <div>{props.profile.contacts.instagram}</div>
+          <div>{props.profile.contacts.youtube}</div>
+          <div>{props.profile.contacts.github}</div>
+          <div>{props.profile.contacts.mainLink}</div>
+        </div>
+        <div>{props.profile.fullName}</div>
+
         ava + description
       </div>
 
