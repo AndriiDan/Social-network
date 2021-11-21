@@ -8,10 +8,13 @@ import { withRouter } from 'react-router-dom';
 class ProfileContainer extends React.Component {
 
   componentDidMount() {
+    // значення з url про id користувача
     let userId = this.props.match.params.userId;
+    // якщо url "/profile" відобразити як при "/profile/2"
     if (!userId) {
       userId = 2;
     }
+    // запит на сервер
     axios.get(`https://social-network.samuraijs.com/api/1.0/profile/` + userId).then(response => {
       // засетити userProfile з сервера
       this.props.setUserProfile(response.data);
@@ -31,6 +34,7 @@ let mapStateToProps = (state) => ({
   profile: state.profilePage.profile
 });
 
+// Компонента для розпізнавання url
 let WithUrlContainerComponent = withRouter(ProfileContainer);
 
 export default connect(mapStateToProps, { setUserProfile })(WithUrlContainerComponent);
