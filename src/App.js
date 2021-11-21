@@ -19,7 +19,7 @@ const App = (props) => {
             <div className="app-audi-content">
                 {/* Route - спеціальні компоненти, які слідкують за url (path='/profile'), якщо url підходить, то виконує render */}
                 <Route
-                    path='/profile/:userId'
+                    path='/profile/:userId?'
                     render={() =>
                         <ProfileContainer />} />
                 <Route
