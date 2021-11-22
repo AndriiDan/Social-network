@@ -3,7 +3,8 @@ const SET_USER_DATE = 'SET_USER_DATE';
 let initialState = {
     id: null,
     email: null,
-    login: null
+    login: null,
+    isAuth: false
 }
 
 const authReducer = (state = initialState, action) => {
@@ -11,7 +12,8 @@ const authReducer = (state = initialState, action) => {
         case SET_USER_DATE:
             return {
                 ...state,
-                ...action.date
+                ...action.date,
+                isAuth: true
             };
         default:
             return state;
