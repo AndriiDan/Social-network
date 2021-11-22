@@ -18,7 +18,7 @@ const authReducer = (state = initialState, action) => {
     }
 }
 
-export const setUserDate = (userId, email, login) =>
+export const setAuthUserDate = (userId, email, login) =>
     ({ type: SET_USER_DATE, date: { userId, email, login } })
 
 export default authReducer;
