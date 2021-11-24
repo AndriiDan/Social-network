@@ -10,14 +10,15 @@ class UsersContainer extends React.Component {
     componentDidMount() {
         // для відображення анімації при відправленні запиту
         this.props.toggleIsFetching(true);
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`).then(response => {
-            // для завершення відображення анімації після запиту   
-            this.props.toggleIsFetching(false);
-            // засетити users
-            this.props.setUsers(response.data.items);
-            // засетити загальну к-сть юзерів
-            this.props.setTotalUsersCount(response.data.totalCount);
-        });
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`,
+            { withCredentials: true }).then(response => {
+                // для завершення відображення анімації після запиту   
+                this.props.toggleIsFetching(false);
+                // засетити users
+                this.props.setUsers(response.data.items);
+                // засетити загальну к-сть юзерів
+                this.props.setTotalUsersCount(response.data.totalCount);
+            });
     }
 
     // метод, для обробника подій onClick - для зміни номера сторінки users, + запит на сервер 
@@ -25,11 +26,12 @@ class UsersContainer extends React.Component {
         // для відображення анімації при відправленні запиту
         this.props.toggleIsFetching(true);
         this.props.setCurrentPage(pageNumber);
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`).then(response => {
-            this.props.setUsers(response.data.items);
-            // для завершення відображення анімації після запиту
-            this.props.toggleIsFetching(false);
-        });
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`,
+            { withCredentials: true }).then(response => {
+                this.props.setUsers(response.data.items);
+                // для завершення відображення анімації після запиту
+                this.props.toggleIsFetching(false);
+            });
     }
 
     render() {

@@ -49,7 +49,7 @@ let Users = (props) => {
                                         }
                                     }).
                                         then(response => {
-                                            if (response.dada.resultCode == 0) {
+                                            if (response.data.resultCode == 0) {
                                                 props.unfollow(u.id)
                                             }
                                         });
@@ -62,7 +62,7 @@ let Users = (props) => {
                                         }
                                     }).
                                         then(response => {
-                                            if (response.dada.resultCode == 0) {
+                                            if (response.data.resultCode == 0) {
                                                 props.follow(u.id)
                                             }
                                         });
