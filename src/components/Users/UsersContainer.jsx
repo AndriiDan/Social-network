@@ -4,14 +4,16 @@ import { follow, setCurrentPage, setUsers, setTotalUsersCount, toggleIsFetching,
 import Users from './Users';
 import * as axios from 'axios';
 import Preloader from '../common/Preloader/Preloader';
+import { getUsers } from '../../api/api';
 
 class UsersContainer extends React.Component {
 
     componentDidMount() {
         // для відображення анімації при відправленні запиту
         this.props.toggleIsFetching(true);
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`,
-            { withCredentials: true }).then(response => {
+        getUsers(this.props.currentPage, this.props.pageSize)
+            .then(response => {
+                debugger;
                 // для завершення відображення анімації після запиту   
                 this.props.toggleIsFetching(false);
                 // засетити users
@@ -26,8 +28,9 @@ class UsersContainer extends React.Component {
         // для відображення анімації при відправленні запиту
         this.props.toggleIsFetching(true);
         this.props.setCurrentPage(pageNumber);
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`,
-            { withCredentials: true }).then(response => {
+        getUsers(pageNumber, this.props.pageSize)
+            // axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`, { withCredentials: true })
+            .then(response => {
                 this.props.setUsers(response.data.items);
                 // для завершення відображення анімації після запиту
                 this.props.toggleIsFetching(false);
