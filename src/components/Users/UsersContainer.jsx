@@ -11,15 +11,15 @@ class UsersContainer extends React.Component {
     componentDidMount() {
         // для відображення анімації при відправленні запиту
         this.props.toggleIsFetching(true);
+        // getUsers - get-запит
         getUsers(this.props.currentPage, this.props.pageSize)
-            .then(response => {
-                debugger;
+            .then(data => {
                 // для завершення відображення анімації після запиту   
                 this.props.toggleIsFetching(false);
                 // засетити users
-                this.props.setUsers(response.data.items);
+                this.props.setUsers(data.items);
                 // засетити загальну к-сть юзерів
-                this.props.setTotalUsersCount(response.data.totalCount);
+                this.props.setTotalUsersCount(data.totalCount);
             });
     }
 
@@ -28,10 +28,11 @@ class UsersContainer extends React.Component {
         // для відображення анімації при відправленні запиту
         this.props.toggleIsFetching(true);
         this.props.setCurrentPage(pageNumber);
+        // getUsers - get-запит
         getUsers(pageNumber, this.props.pageSize)
             // axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`, { withCredentials: true })
-            .then(response => {
-                this.props.setUsers(response.data.items);
+            .then(data => {
+                this.props.setUsers(data.items);
                 // для завершення відображення анімації після запиту
                 this.props.toggleIsFetching(false);
             });
