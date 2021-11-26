@@ -2,9 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { follow, setCurrentPage, setUsers, setTotalUsersCount, toggleIsFetching, unfollow } from '../../redux/users-reducer';
 import Users from './Users';
-import * as axios from 'axios';
 import Preloader from '../common/Preloader/Preloader';
-import { getUsers } from '../../api/api';
+import { usersAPI } from '../../api/api';
 
 class UsersContainer extends React.Component {
 
@@ -12,7 +11,7 @@ class UsersContainer extends React.Component {
         // для відображення анімації при відправленні запиту
         this.props.toggleIsFetching(true);
         // getUsers - get-запит
-        getUsers(this.props.currentPage, this.props.pageSize)
+        usersAPI.getUsers(this.props.currentPage, this.props.pageSize)
             .then(data => {
                 // для завершення відображення анімації після запиту   
                 this.props.toggleIsFetching(false);
@@ -29,7 +28,7 @@ class UsersContainer extends React.Component {
         this.props.toggleIsFetching(true);
         this.props.setCurrentPage(pageNumber);
         // getUsers - get-запит
-        getUsers(pageNumber, this.props.pageSize)
+        usersAPI.getUsers(pageNumber, this.props.pageSize)
             // axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`, { withCredentials: true })
             .then(data => {
                 this.props.setUsers(data.items);
