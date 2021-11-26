@@ -1,5 +1,6 @@
 import *as axios from "axios";
 
+// окремий екземпляр axios
 const instance = axios.create({
     withCredentials: true,
     baseURL: "https://social-network.samuraijs.com/api/1.0/",
@@ -9,9 +10,10 @@ const instance = axios.create({
 })
 
 export const usersAPI = {
+    // запит для отримання юзерів
     getUsers(currentPage = 1, pageSize = 10) {
-        return instance.get(`users?page=${currentPage}&count=${pageSize}`,
-            { withCredentials: true }).then(response => {
+        return instance.get(`users?page=${currentPage}&count=${pageSize}`)
+            .then(response => {
                 return response.data;
             });
     }
