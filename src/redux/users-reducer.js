@@ -18,8 +18,8 @@ let initialState = {
     currentPage: 1,
     // для відображення анімації при оновленні або запиті
     isFetching: true,
-    // для блокування кнопки при відправлення запиту
-    followingInProgress: false
+    // для блокування кнопки при відправленні запиту
+    followingInProgress: [2, 3]
 }
 
 const usersReducer = (state = initialState, action) => {
@@ -70,10 +70,13 @@ const usersReducer = (state = initialState, action) => {
                 isFetching: action.isFetching
             };
         }
+        // для блокування кнопки при відправленні запиту
         case TOGGLE_IS_FOLLOWING_PROGRESS: {
             return {
                 ...state,
                 followingInProgress: action.isFetching
+                    ? [...state.followingInProgress, action.userId]
+                    : state.followingInProgress.filter(id => id != action.userId)
             };
         }
         default:
@@ -103,8 +106,9 @@ export const setTotalUsersCount = (totalUsersCount) => ({
 export const toggleIsFetching = (isFetching) => ({
     type: TOGGLE_IS_FETCHING, isFetching
 })
-export const toggleFollowingProgress = (isFetching) => ({
-    type: TOGGLE_IS_FOLLOWING_PROGRESS, isFetching
+// для блокування кнопки при відправленні запиту
+export const toggleFollowingProgress = (isFetching, userId) => ({
+    type: TOGGLE_IS_FOLLOWING_PROGRESS, isFetching, userId
 })
 
 export default usersReducer;
