@@ -114,7 +114,7 @@ export const toggleFollowingProgress = (isFetching, userId) => ({
 })
 
 // ThunkCreator
-export const getUsersThunkCreator = (currentPage, pageSize) => {
+export const getUsers = (currentPage, pageSize) => {
     return (dispatch) => {
         // для відображення анімації при відправленні запиту
         dispatch(toggleIsFetching(true));

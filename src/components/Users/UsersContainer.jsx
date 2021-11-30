@@ -1,9 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { follow, setCurrentPage, setUsers, setTotalUsersCount, toggleIsFetching, unfollow, toggleFollowingProgress, getUsersThunkCreator } from '../../redux/users-reducer';
+// import { follow, setCurrentPage, setUsers, setTotalUsersCount, toggleIsFetching, unfollow, toggleFollowingProgress, getUsers } from '../../redux/users-reducer'; // видалити
+import { follow, setCurrentPage, unfollow, toggleFollowingProgress, getUsers } from '../../redux/users-reducer';
 import Users from './Users';
 import Preloader from '../common/Preloader/Preloader';
-import { usersAPI } from '../../api/api';
+// import { usersAPI } from '../../api/api'; // видалити
 
 class UsersContainer extends React.Component {
 
@@ -27,17 +28,19 @@ class UsersContainer extends React.Component {
 
     // метод, для обробника подій onClick - для зміни номера сторінки users, + запит на сервер 
     onPageChanged = (pageNumber) => {
-        // для відображення анімації при відправленні запиту
-        this.props.setCurrentPage(pageNumber);
-        this.props.toggleIsFetching(true);
-        // getUsers - get-запит
-        usersAPI.getUsers(pageNumber, this.props.pageSize)
-            // axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`, { withCredentials: true })
-            .then(data => {
-                // для завершення відображення анімації після запиту
-                this.props.toggleIsFetching(false);
-                this.props.setUsers(data.items);
-            });
+        this.props.getUsers(pageNumber, this.props.pageSize);
+
+        // // для відображення анімації при відправленні запиту
+        // this.props.setCurrentPage(pageNumber);
+        // this.props.toggleIsFetching(true);
+        // // getUsers - get-запит
+        // usersAPI.getUsers(pageNumber, this.props.pageSize)
+        //     // axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`, { withCredentials: true })
+        //     .then(data => {
+        //         // для завершення відображення анімації після запиту
+        //         this.props.toggleIsFetching(false);
+        //         this.props.setUsers(data.items);
+        //     });
     }
 
     render() {
@@ -71,6 +74,7 @@ let mapStateToProps = (state) => {
 }
 
 export default connect(mapStateToProps, {
-    follow, unfollow, setUsers, setCurrentPage, setTotalUsersCount, toggleIsFetching, toggleFollowingProgress,
-    getUsers: getUsersThunkCreator
+    follow, unfollow, setCurrentPage, toggleFollowingProgress,
+    //  setUsers, toggleIsFetching, setTotalUsersCount, // видалити
+    getUsers: getUsers
 })(UsersContainer);
