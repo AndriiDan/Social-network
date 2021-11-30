@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { follow, setCurrentPage, setUsers, setTotalUsersCount, toggleIsFetching, unfollow, toggleFollowingProgress } from '../../redux/users-reducer';
+import { follow, setCurrentPage, setUsers, setTotalUsersCount, toggleIsFetching, unfollow, toggleFollowingProgress, getUsersThunkCreator } from '../../redux/users-reducer';
 import Users from './Users';
 import Preloader from '../common/Preloader/Preloader';
 import { usersAPI } from '../../api/api';
@@ -8,32 +8,35 @@ import { usersAPI } from '../../api/api';
 class UsersContainer extends React.Component {
 
     componentDidMount() {
-        // для відображення анімації при відправленні запиту
-        this.props.toggleIsFetching(true);
-        // getUsers - get-запит
-        usersAPI.getUsers(this.props.currentPage, this.props.pageSize)
-            .then(data => {
-                // для завершення відображення анімації після запиту   
-                this.props.toggleIsFetching(false);
-                // засетити users
-                this.props.setUsers(data.items);
-                // засетити загальну к-сть юзерів
-                this.props.setTotalUsersCount(data.totalCount);
-            });
+
+        this.props.getUsers(this.props.currentPage, this.props.pageSize);
+
+        // // для відображення анімації при відправленні запиту
+        // this.props.toggleIsFetching(true);
+        // // getUsers - get-запит
+        // usersAPI.getUsers(this.props.currentPage, this.props.pageSize)
+        //     .then(data => {
+        //         // для завершення відображення анімації після запиту   
+        //         this.props.toggleIsFetching(false);
+        //         // засетити users
+        //         this.props.setUsers(data.items);
+        //         // засетити загальну к-сть юзерів
+        //         this.props.setTotalUsersCount(data.totalCount);
+        //     });
     }
 
     // метод, для обробника подій onClick - для зміни номера сторінки users, + запит на сервер 
     onPageChanged = (pageNumber) => {
         // для відображення анімації при відправленні запиту
-        this.props.toggleIsFetching(true);
         this.props.setCurrentPage(pageNumber);
+        this.props.toggleIsFetching(true);
         // getUsers - get-запит
         usersAPI.getUsers(pageNumber, this.props.pageSize)
             // axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`, { withCredentials: true })
             .then(data => {
-                this.props.setUsers(data.items);
                 // для завершення відображення анімації після запиту
                 this.props.toggleIsFetching(false);
+                this.props.setUsers(data.items);
             });
     }
 
@@ -68,5 +71,6 @@ let mapStateToProps = (state) => {
 }
 
 export default connect(mapStateToProps, {
-    follow, unfollow, setUsers, setCurrentPage, setTotalUsersCount, toggleIsFetching, toggleFollowingProgress
+    follow, unfollow, setUsers, setCurrentPage, setTotalUsersCount, toggleIsFetching, toggleFollowingProgress,
+    getUsers: getUsersThunkCreator
 })(UsersContainer);

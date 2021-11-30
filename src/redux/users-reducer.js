@@ -1,3 +1,5 @@
+import { usersAPI } from "../api/api";
+
 // використовуємо константи замість рядків для мінімізації помилки в написання
 const FOLLOW = 'FOLLOW';
 const UNFOLLOW = 'UNFOLLOW';
@@ -110,5 +112,23 @@ export const toggleIsFetching = (isFetching) => ({
 export const toggleFollowingProgress = (isFetching, userId) => ({
     type: TOGGLE_IS_FOLLOWING_PROGRESS, isFetching, userId
 })
+
+// ThunkCreator
+export const getUsersThunkCreator = (currentPage, pageSize) => {
+    return (dispatch) => {
+        // для відображення анімації при відправленні запиту
+        dispatch(toggleIsFetching(true));
+        // getUsers - get-запит
+        usersAPI.getUsers(currentPage, pageSize)
+            .then(data => {
+                // для завершення відображення анімації після запиту 
+                dispatch(toggleIsFetching(false));
+                // засетити users
+                dispatch(setUsers(data.items));
+                // засетити загальну к-сть юзерів
+                dispatch(setTotalUsersCount(data.totalCount));
+            });
+    }
+}
 
 export default usersReducer;
