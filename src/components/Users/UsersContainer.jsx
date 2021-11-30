@@ -9,7 +9,6 @@ import Preloader from '../common/Preloader/Preloader';
 class UsersContainer extends React.Component {
 
     componentDidMount() {
-
         this.props.getUsers(this.props.currentPage, this.props.pageSize);
 
         // // для відображення анімації при відправленні запиту
@@ -55,7 +54,6 @@ class UsersContainer extends React.Component {
                 follow={this.props.follow}
                 unfollow={this.props.unfollow}
                 followingInProgress={this.props.followingInProgress}
-                toggleFollowingProgress={this.props.toggleFollowingProgress}
             />
         </>
     }
