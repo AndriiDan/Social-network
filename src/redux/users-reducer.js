@@ -19,7 +19,7 @@ let initialState = {
     // для відображення анімації при оновленні або запиті
     isFetching: true,
     // для блокування кнопки при відправленні запиту
-    followingInProgress: [2, 3]
+    followingInProgress: []
 }
 
 const usersReducer = (state = initialState, action) => {
