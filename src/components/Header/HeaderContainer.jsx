@@ -1,19 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { authAPI } from '../../api/api';
-import { setAuthUserDate } from '../../redux/auth-reducer';
+import { getAuthUserData } from '../../redux/auth-reducer';
 import Header from './Header';
 
 class HeaderContainer extends React.Component {
     componentDidMount() {
-        // авторизація
-        authAPI.me()
-            .then(response => {
-                if (response.data.resultCode === 0) {
-                    let { id, email, login } = response.data.data;
-                    this.props.setAuthUserDate(id, email, login);
-                }
-            });
+        // запит на сервер, авторизація
+        this.props.getAuthUserData();
     }
 
     render() {
@@ -26,4 +19,4 @@ const mapStateToProps = (state) => ({
     login: state.auth.login
 })
 
-export default connect(mapStateToProps, { setAuthUserDate })(HeaderContainer);
+export default connect(mapStateToProps, { getAuthUserData })(HeaderContainer);
