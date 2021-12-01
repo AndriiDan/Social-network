@@ -17,16 +17,22 @@ export const usersAPI = {
                 return response.data;
             });
     },
+    // відписатися від користувача
     unfollow(userId) {
         return instance.delete(`follow/${userId}`)
             .then(response => {
                 return response.data;
             });
     },
+    // підписатися на користувача
     follow(userId) {
         return instance.post(`follow/${userId}`)
             .then(response => {
                 return response.data;
             });
+    },
+    // відкрити сторінку користувача
+    getProfile(userId) {
+        return instance.get(`profile/` + userId)
     }
 }

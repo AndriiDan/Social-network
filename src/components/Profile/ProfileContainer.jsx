@@ -1,9 +1,9 @@
-import axios from 'axios';
 import React from 'react';
 import { connect } from 'react-redux';
 import Profile from './Profile';
 import { setUserProfile } from '../../redux/profile-reducer'
 import { withRouter } from 'react-router-dom';
+import { usersAPI } from '../../api/api';
 
 class ProfileContainer extends React.Component {
 
@@ -15,10 +15,11 @@ class ProfileContainer extends React.Component {
       userId = 2;
     }
     // запит на сервер
-    axios.get(`https://social-network.samuraijs.com/api/1.0/profile/` + userId).then(response => {
-      // засетити userProfile з сервера
-      this.props.setUserProfile(response.data);
-    });
+    usersAPI.getProfile(userId)
+      .then(response => {
+        // засетити userProfile з сервера
+        this.props.setUserProfile(response.data);
+      });
   }
 
   render() {
