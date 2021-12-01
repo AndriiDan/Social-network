@@ -1,4 +1,5 @@
 import React from 'react';
+import { Redirect } from 'react-router-dom';
 import DialogItem from './DialogItem/DialogItem';
 import s from './Dialogs.module.css';
 import Message from './Message/Message';
@@ -21,8 +22,8 @@ const Dialogs = (props) => {
         props.updateNewMessageBody(body);
     }
 
-    // вивід статусу авторизації
-    alert(props.isAuth);
+    // перенапрівлення для авторизації при неавторизованому вході
+    if (props.isAuth == false) { return <Redirect to={"/login"} /> };
 
     return (
         <div className={s.dialogs}>
