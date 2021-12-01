@@ -21,6 +21,9 @@ const Dialogs = (props) => {
         props.updateNewMessageBody(body);
     }
 
+    // вивід статусу авторизації
+    alert(props.isAuth);
+
     return (
         <div className={s.dialogs}>
             <div className={s.dialogsElements}>
