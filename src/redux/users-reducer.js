@@ -127,6 +127,8 @@ export const getUsers = (currentPage, pageSize) => {
                 dispatch(setUsers(data.items));
                 // засетити загальну к-сть юзерів
                 dispatch(setTotalUsersCount(data.totalCount));
+                // відображати активний номер сторінки користувачі
+                dispatch(setCurrentPage(currentPage));
             });
     }
 }
