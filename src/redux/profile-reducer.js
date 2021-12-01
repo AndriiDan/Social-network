@@ -1,3 +1,5 @@
+import { usersAPI } from "../api/api";
+
 // використовуємо константи замість рядків для мінімізації помилки в написання
 const ADD_POST = 'ADD-POST';
 const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
@@ -54,5 +56,15 @@ export const updateNewPostTextActionCreator = (text) =>
 export const setUserProfile = (profile) => ({
     type: SET_USER_PROFILE, profile
 })
+
+// thunk для конкретного користувача
+export const getUserProfile = (userId) => (dispatch) => {
+    // запит на сервер з api.is
+    usersAPI.getProfile(userId)
+        .then(response => {
+            // засетити userProfile з сервера
+            dispatch(setUserProfile(response.data));
+        });
+}
 
 export default profileReducer;

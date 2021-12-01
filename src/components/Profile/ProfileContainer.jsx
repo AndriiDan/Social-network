@@ -1,9 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Profile from './Profile';
-import { setUserProfile } from '../../redux/profile-reducer'
+import { getUserProfile } from '../../redux/profile-reducer'
 import { withRouter } from 'react-router-dom';
-import { usersAPI } from '../../api/api';
 
 class ProfileContainer extends React.Component {
 
@@ -14,12 +13,9 @@ class ProfileContainer extends React.Component {
     if (!userId) {
       userId = 2;
     }
-    // запит на сервер
-    usersAPI.getProfile(userId)
-      .then(response => {
-        // засетити userProfile з сервера
-        this.props.setUserProfile(response.data);
-      });
+
+    // запит на сервер, засетити (відобразити) конкретного юзера (userProfile) з сервера
+    this.props.getUserProfile(userId)
   }
 
   render() {
@@ -38,4 +34,4 @@ let mapStateToProps = (state) => ({
 // Компонента для розпізнавання url
 let WithUrlContainerComponent = withRouter(ProfileContainer);
 
-export default connect(mapStateToProps, { setUserProfile })(WithUrlContainerComponent);
+export default connect(mapStateToProps, { getUserProfile })(WithUrlContainerComponent);
