@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import Profile from './Profile';
 import { getUserProfile } from '../../redux/profile-reducer'
-import { withRouter } from 'react-router-dom';
+import { Redirect, withRouter } from 'react-router-dom';
 
 class ProfileContainer extends React.Component {
 
@@ -19,6 +19,9 @@ class ProfileContainer extends React.Component {
   }
 
   render() {
+    // перенапрівлення для авторизації при неавторизованому вході
+    if (this.props.isAuth === false) return <Redirect to="/login" />
+
     return (
       <div>
         <Profile {...this.props} profile={this.props.profile} />
@@ -28,7 +31,9 @@ class ProfileContainer extends React.Component {
 }
 
 let mapStateToProps = (state) => ({
-  profile: state.profilePage.profile
+  profile: state.profilePage.profile,
+  // запит у state значення isAuth
+  isAuth: state.auth.isAuth
 });
 
 // Компонента для розпізнавання url
