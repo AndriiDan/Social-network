@@ -23,7 +23,7 @@ const Dialogs = (props) => {
     }
 
     // перенапрівлення для авторизації при неавторизованому вході
-    if (props.isAuth == false) { return <Redirect to={"/login"} /> };
+    if (!props.isAuth) { return <Redirect to={"/login"} /> };
 
     return (
         <div className={s.dialogs}>

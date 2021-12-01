@@ -20,7 +20,7 @@ class ProfileContainer extends React.Component {
 
   render() {
     // перенапрівлення для авторизації при неавторизованому вході
-    if (this.props.isAuth === false) return <Redirect to="/login" />
+    if (!this.props.isAuth) return <Redirect to="/login" />
 
     return (
       <div>
