@@ -1,5 +1,11 @@
 import React from "react";
+import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
+
+let mapStateToPropsForRedirect = (state) => ({
+    // запит у state значення isAuth
+    isAuth: state.auth.isAuth
+});
 
 export const withAuthRedirect = (Component) => {
     class RedirectComponent extends React.Component {
@@ -10,5 +16,9 @@ export const withAuthRedirect = (Component) => {
             return <Component {...this.props} />
         }
     }
-    return RedirectComponent
+
+    // обертаю RedirectComponent коннектом, щоб прокинути значення isAuth
+    let ConnectedAuthRedirectComponent = connect(mapStateToPropsForRedirect)(RedirectComponent);
+
+    return ConnectedAuthRedirectComponent
 }
