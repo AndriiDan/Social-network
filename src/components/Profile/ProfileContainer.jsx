@@ -4,6 +4,7 @@ import Profile from './Profile';
 import { getUserProfile } from '../../redux/profile-reducer'
 import { withRouter } from 'react-router-dom';
 import { withAuthRedirect } from '../../hoc/withAuthRedirect';
+import { compose } from 'redux';
 
 class ProfileContainer extends React.Component {
 
@@ -28,17 +29,16 @@ class ProfileContainer extends React.Component {
   }
 }
 
-// контейнерна компонента над ProfileContainer для перевірки авторизації p HOC withAuthRedirect
-let AuthRedirectComponent = withAuthRedirect(ProfileContainer);
-
 let mapStateToProps = (state) => ({
   // запит у state значення profile
   profile: state.profilePage.profile,
 });
 
-
-
-// Компонента для розпізнавання url
-let WithUrlContainerComponent = withRouter(AuthRedirectComponent);
-
-export default connect(mapStateToProps, { getUserProfile })(WithUrlContainerComponent);
+// слої поверх ProfileContainer, починаючи з низу: withAuthRedirect, withRouter, connect
+export default compose(
+  connect(mapStateToProps, { getUserProfile }),
+  // для розпізнавання url
+  withRouter,
+  // для перевірки авторизації
+  withAuthRedirect
+)(ProfileContainer)
