@@ -19,9 +19,6 @@ class ProfileContainer extends React.Component {
   }
 
   render() {
-    // перенапрівлення для авторизації при неавторизованому вході
-    if (!this.props.isAuth) return <Redirect to="/login" />
-
     return (
       <div>
         <Profile {...this.props} profile={this.props.profile} />
@@ -36,7 +33,15 @@ let mapStateToProps = (state) => ({
   isAuth: state.auth.isAuth
 });
 
+// контейнерна компонента над ProfileContainer для перевірки авторизації
+let AutnRedirectComponent = (props) => {
+  // перенапрівлення для авторизації при неавторизованому вході
+  if (!props.isAuth) return <Redirect to="/login" />
+  // в {...props} прокидує пропси всередину
+  return <ProfileContainer {...props} />
+}
+
 // Компонента для розпізнавання url
-let WithUrlContainerComponent = withRouter(ProfileContainer);
+let WithUrlContainerComponent = withRouter(AutnRedirectComponent);
 
 export default connect(mapStateToProps, { getUserProfile })(WithUrlContainerComponent);
