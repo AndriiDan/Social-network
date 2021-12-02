@@ -28,14 +28,22 @@ class ProfileContainer extends React.Component {
   }
 }
 
-let mapStateToProps = (state) => ({
-  profile: state.profilePage.profile,
+// контейнерна компонента над ProfileContainer для перевірки авторизації p HOC withAuthRedirect
+let AuthRedirectComponent = withAuthRedirect(ProfileContainer);
+
+let mapStateToPropsForRedirect = (state) => ({
   // запит у state значення isAuth
   isAuth: state.auth.isAuth
 });
 
-// контейнерна компонента над ProfileContainer для перевірки авторизації p HOC withAuthRedirect
-let AuthRedirectComponent = withAuthRedirect(ProfileContainer);
+AuthRedirectComponent = connect(mapStateToPropsForRedirect)(AuthRedirectComponent);
+
+let mapStateToProps = (state) => ({
+  // запит у state значення profile
+  profile: state.profilePage.profile,
+});
+
+
 
 // Компонента для розпізнавання url
 let WithUrlContainerComponent = withRouter(AuthRedirectComponent);
