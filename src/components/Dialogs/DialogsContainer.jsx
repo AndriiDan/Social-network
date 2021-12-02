@@ -2,7 +2,7 @@ import React from 'react';
 import { updateNewMessageBodyCreator, sendMessageCreator } from '../../redux/dialogs-reducer';
 import Dialogs from './Dialogs';
 import { connect } from "react-redux";
-import { Redirect } from 'react-router-dom';
+import { withAuthRedirect } from '../../hoc/withAuthRedirect';
 
 let mapStateToProps = (state) => {
     return {
@@ -24,14 +24,9 @@ let mapDispatchToProps = (dispatch) => {
     }
 }
 
-// контейнерна компонента над Dialogs для перевірки авторизації
-let AutnRedirectComponent = (props) => {
-    // перенапрівлення для авторизації при неавторизованому вході
-    if (!props.isAuth) return <Redirect to="/login" />
-    // в {...props} прокидує пропси всередину
-    return <Dialogs {...props} />
-}
+// контейнерна компонента над ProfileContainer для перевірки авторизації p HOC withAuthRedirect
+let AuthRedirectComponent = withAuthRedirect(Dialogs);
 
-const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(AutnRedirectComponent);
+const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(AuthRedirectComponent);
 
 export default DialogsContainer;

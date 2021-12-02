@@ -2,7 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import Profile from './Profile';
 import { getUserProfile } from '../../redux/profile-reducer'
-import { Redirect, withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
+import { withAuthRedirect } from '../../hoc/withAuthRedirect';
 
 class ProfileContainer extends React.Component {
 
@@ -33,15 +34,10 @@ let mapStateToProps = (state) => ({
   isAuth: state.auth.isAuth
 });
 
-// контейнерна компонента над ProfileContainer для перевірки авторизації
-let AutnRedirectComponent = (props) => {
-  // перенапрівлення для авторизації при неавторизованому вході
-  if (!props.isAuth) return <Redirect to="/login" />
-  // в {...props} прокидує пропси всередину
-  return <ProfileContainer {...props} />
-}
+// контейнерна компонента над ProfileContainer для перевірки авторизації p HOC withAuthRedirect
+let AuthRedirectComponent = withAuthRedirect(ProfileContainer);
 
 // Компонента для розпізнавання url
-let WithUrlContainerComponent = withRouter(AutnRedirectComponent);
+let WithUrlContainerComponent = withRouter(AuthRedirectComponent);
 
 export default connect(mapStateToProps, { getUserProfile })(WithUrlContainerComponent);
