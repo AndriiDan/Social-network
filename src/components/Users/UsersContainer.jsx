@@ -72,11 +72,8 @@ let mapStateToProps = (state) => {
     }
 }
 
-// HOC перевірка чи авторизований вхід
-let withRedirect = withAuthRedirect(UsersContainer)
-
-export default connect(mapStateToProps, {
+export default withAuthRedirect(connect(mapStateToProps, {
     follow, unfollow, setCurrentPage, toggleFollowingProgress,
     //  setUsers, toggleIsFetching, setTotalUsersCount, // видалити
     getUsers: getUsers
-})(withRedirect);
+})(UsersContainer));
