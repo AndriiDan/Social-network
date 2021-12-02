@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { follow, setCurrentPage, unfollow, toggleFollowingProgress, getUsers } from '../../redux/users-reducer';
 import Users from './Users';
 import Preloader from '../common/Preloader/Preloader';
+import { withAuthRedirect } from '../../hoc/withAuthRedirect';
 // import { usersAPI } from '../../api/api'; // видалити
 
 class UsersContainer extends React.Component {
@@ -71,8 +72,11 @@ let mapStateToProps = (state) => {
     }
 }
 
+// HOC перевірка чи авторизований вхід
+let withRedirect = withAuthRedirect(UsersContainer)
+
 export default connect(mapStateToProps, {
     follow, unfollow, setCurrentPage, toggleFollowingProgress,
     //  setUsers, toggleIsFetching, setTotalUsersCount, // видалити
     getUsers: getUsers
-})(UsersContainer);
+})(withRedirect);
