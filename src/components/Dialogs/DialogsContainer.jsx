@@ -6,10 +6,8 @@ import { withAuthRedirect } from '../../hoc/withAuthRedirect';
 
 let mapStateToProps = (state) => {
     return {
+        // запит у state значення dialogsPage
         dialogsPage: state.dialogsPage,
-        // запит у state значення isAuth
-        isAuth: state.auth.isAuth
-
     }
 }
 
