@@ -5,6 +5,7 @@ import { follow, setCurrentPage, unfollow, toggleFollowingProgress, getUsers } f
 import Users from './Users';
 import Preloader from '../common/Preloader/Preloader';
 import { withAuthRedirect } from '../../hoc/withAuthRedirect';
+import { compose } from 'redux';
 // import { usersAPI } from '../../api/api'; // видалити
 
 class UsersContainer extends React.Component {
@@ -72,8 +73,9 @@ let mapStateToProps = (state) => {
     }
 }
 
-export default withAuthRedirect(connect(mapStateToProps, {
-    follow, unfollow, setCurrentPage, toggleFollowingProgress,
-    //  setUsers, toggleIsFetching, setTotalUsersCount, // видалити
-    getUsers: getUsers
-})(UsersContainer));
+// слої поверх UsersContainer, починаючи з низу: connect, withAuthRedirect
+export default compose(
+    // перевірки авторизації
+    withAuthRedirect,
+    connect(mapStateToProps, { follow, unfollow, setCurrentPage, toggleFollowingProgress, getUsers })
+)(UsersContainer);
