@@ -39,6 +39,6 @@ export default compose(
   connect(mapStateToProps, { getUserProfile }),
   // для розпізнавання url
   withRouter,
-  // для перевірки авторизації
-  withAuthRedirect
+  // для перевірки авторизації. Тимчасово закоментуб, бо при авторизованому вході при F5 перекидує на LOGIN
+  // withAuthRedirect
 )(ProfileContainer)
