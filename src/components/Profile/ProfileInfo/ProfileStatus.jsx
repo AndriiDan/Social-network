@@ -1,17 +1,19 @@
-import Redux from 'redux';
+import React from 'react';
 import s from './ProfileInfo.module.css';
 
-const ProfileStatus = (props) => {
-    return (
-        <div>
+class ProfileStatus extends React.Component {
+    render() {
+        return (
             <div>
-                <div>{props.status}</div>
+                <div>
+                    <div>{this.props.status}</div>
+                </div>
+                <div>
+                    <input value={this.props.status} />
+                </div>
             </div>
-            <div>
-                <input value={props.status} />
-            </div>
-        </div>
-    )
+        )
+    }
 }
 
 export default ProfileStatus;
