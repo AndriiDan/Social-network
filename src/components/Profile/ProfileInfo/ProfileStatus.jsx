@@ -21,6 +21,9 @@ class ProfileStatus extends React.Component {
         });
     }
 
+    // виділення тексту в input при doubleClick по status
+    handleFocus = (event) => { event.target.select() }
+
     render() {
         return (
             <div>
@@ -33,7 +36,7 @@ class ProfileStatus extends React.Component {
                 {/* якщо editMode: true - відобразить input */}
                 {this.state.editMode &&
                     <div>
-                        <input autoFocus={true} onBlur={this.deactivateEditMode.bind(this)} value={this.props.status} />
+                        <input onFocus={this.handleFocus} autoFocus={true} onBlur={this.deactivateEditMode.bind(this)} value={this.props.status} />
                     </div>
                 }
             </div>
