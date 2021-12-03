@@ -9,9 +9,14 @@ class ProfileStatus extends React.Component {
 
     // зміна значення editMode при onDoubleClick
     activateEditMode = () => {
+        console.log(this.state.editMode);
+
         this.setState({
             editMode: true
-        })
+        });
+
+        console.log(this.state.editMode);
+
     }
 
     render() {
