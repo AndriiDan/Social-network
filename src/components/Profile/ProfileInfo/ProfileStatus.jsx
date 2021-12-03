@@ -33,7 +33,7 @@ class ProfileStatus extends React.Component {
                 {/* якщо editMode: true - відобразить input */}
                 {this.state.editMode &&
                     <div>
-                        <input onBlur={this.deactivateEditMode.bind(this)} value={this.props.status} />
+                        <input autoFocus={true} onBlur={this.deactivateEditMode.bind(this)} value={this.props.status} />
                     </div>
                 }
             </div>
