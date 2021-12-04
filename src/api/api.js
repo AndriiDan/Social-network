@@ -31,7 +31,15 @@ export const usersAPI = {
                 return response.data;
             });
     },
-    // відкрити сторінку користувача
+    // отримати сторінку користувача
+    getProfile(userId) {
+        console.warn('Obsolete method. Please profileAPI object.')
+        return profileAPI.getProfile(userId);
+    }
+}
+
+export const profileAPI = {
+    // отримати сторінку користувача
     getProfile(userId) {
         return instance.get(`profile/` + userId)
     }
