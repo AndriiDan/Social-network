@@ -31,7 +31,7 @@ export const usersAPI = {
                 return response.data;
             });
     },
-    // отримати сторінку користувача
+    // отримати з сервера сторінку користувача
     getProfile(userId) {
         console.warn('Obsolete method. Please profileAPI object.')
         return profileAPI.getProfile(userId);
@@ -39,9 +39,17 @@ export const usersAPI = {
 }
 
 export const profileAPI = {
-    // отримати сторінку користувача
+    // отримати з сервера сторінку користувача
     getProfile(userId) {
         return instance.get(`profile/` + userId)
+    },
+    // отримати з сервера статус користувача
+    getStatus(userId) {
+        return instance.get(`status/` + userId)
+    },
+    // надіслати на сервер статус з текстом(статусом)
+    updateStatus(status) {
+        return instance.put(`status/`, { status: status });
     }
 }
 
