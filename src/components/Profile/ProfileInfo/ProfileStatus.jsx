@@ -8,14 +8,14 @@ class ProfileStatus extends React.Component {
     }
 
     // зміна значення editMode при onDoubleClick - фокус на елемент
-    activateEditMode() {
+    activateEditMode = () => {
         this.setState({
             editMode: true
         });
     }
 
     // зміна значення editMode при onBlur - перехід фокуса в інше місце
-    deactivateEditMode() {
+    deactivateEditMode = () => {
         this.setState({
             editMode: false
         });
@@ -30,13 +30,13 @@ class ProfileStatus extends React.Component {
                 {/* якщо editMode: false - відобразить Status */}
                 {!this.state.editMode &&
                     <div>
-                        <span className={s.status} onDoubleClick={this.activateEditMode.bind(this)}>Status: {this.props.status}</span>
+                        <span className={s.status} onDoubleClick={this.activateEditMode}>Status: {this.props.status}</span>
                     </div>
                 }
                 {/* якщо editMode: true - відобразить input */}
                 {this.state.editMode &&
                     <div>
-                        <input onFocus={this.handleFocus} autoFocus={true} onBlur={this.deactivateEditMode.bind(this)} value={this.props.status} />
+                        <input onFocus={this.handleFocus} autoFocus={true} onBlur={this.deactivateEditMode} value={this.props.status} />
                     </div>
                 }
             </div>
