@@ -45,11 +45,11 @@ export const profileAPI = {
     },
     // отримати з сервера статус користувача
     getStatus(userId) {
-        return instance.get(`status/` + userId)
+        return instance.get(`profile/status/` + userId)
     },
     // надіслати на сервер статус з текстом(статусом)
     updateStatus(status) {
-        return instance.put(`status/`, { status: status });
+        return instance.put(`profile/status/`, { status: status });
     }
 }
 
