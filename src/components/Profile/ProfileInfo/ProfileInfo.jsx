@@ -18,7 +18,7 @@ const ProfileInfo = (props) => {
         <img src={props.profile.photos.large} />
 
         {/* відобразити статус конкретного користувача (з сервера) */}
-        <ProfileStatus status={props.status} />
+        <ProfileStatus status={props.status} updateStatus={props.updateStatus} />
 
         <div>Про мене: {props.profile.aboutMe}</div>
         <div>Мої контакти:
