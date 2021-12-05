@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Profile from './Profile';
-import { getUserProfile } from '../../redux/profile-reducer'
+import { getStatus, getUserProfile, updateStatus } from '../../redux/profile-reducer'
 import { withRouter } from 'react-router-dom';
 import { withAuthRedirect } from '../../hoc/withAuthRedirect';
 import { compose } from 'redux';
@@ -17,13 +17,16 @@ class ProfileContainer extends React.Component {
     }
 
     // запит на сервер, засетити (відобразити) конкретного юзера (userProfile) з сервера
-    this.props.getUserProfile(userId)
+    this.props.getUserProfile(userId);
+
+    // запит на сервер, отримати статус конкретного юзера
+    this.props.getStatus(userId)
   }
 
   render() {
     return (
       <div>
-        <Profile {...this.props} profile={this.props.profile} />
+        <Profile {...this.props} profile={this.props.profile} status={this.props.status} updateStatus={this.props.updateStatus} />
       </div>
     );
   }
@@ -32,13 +35,14 @@ class ProfileContainer extends React.Component {
 let mapStateToProps = (state) => ({
   // запит у state значення profile
   profile: state.profilePage.profile,
+  status: state.profilePage.status
 });
 
 // слої поверх ProfileContainer, починаючи з низу: withAuthRedirect, withRouter, connect
 export default compose(
-  connect(mapStateToProps, { getUserProfile }),
+  connect(mapStateToProps, { getUserProfile, getStatus, updateStatus }),
   // для розпізнавання url
   withRouter,
   // для перевірки авторизації. Тимчасово закоментуб, бо при авторизованому вході при F5 перекидує на LOGIN
-  // withAuthRedirect
+  // withAuthRedirect,
 )(ProfileContainer)

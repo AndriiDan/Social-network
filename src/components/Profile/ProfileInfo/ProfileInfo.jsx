@@ -4,6 +4,7 @@ import s from './ProfileInfo.module.css';
 import ProfileStatus from './ProfileStatus';
 
 const ProfileInfo = (props) => {
+  // якщо не props.profile, то відобразить крутилку
   if (!props.profile) {
     return <Preloader />
   }
@@ -15,7 +16,10 @@ const ProfileInfo = (props) => {
       </div>
       <div className={s.descriptionBlock}>
         <img src={props.profile.photos.large} />
-        <ProfileStatus status={"Hello my friends"} />
+
+        {/* відобразити статус конкретного користувача (з сервера) */}
+        <ProfileStatus status={props.status} />
+
         <div>Про мене: {props.profile.aboutMe}</div>
         <div>Мої контакти:
           <div>{props.profile.contacts.facebook}</div>

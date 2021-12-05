@@ -1,9 +1,10 @@
-import { usersAPI } from "../api/api";
+import { profileAPI, usersAPI } from "../api/api";
 
 // використовуємо константи замість рядків для мінімізації помилки в написання
 const ADD_POST = 'ADD-POST';
 const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
 const SET_USER_PROFILE = 'SET_USER_PROFILE';
+const SET_STATUS = 'SET_STATUS';
 
 // Для першого запуску profileReducer
 let initialState = {
@@ -13,7 +14,8 @@ let initialState = {
     ],
     // стартове значення в полі вводу в text
     newPostText: 'it-kamasutra.com',
-    profile: null
+    profile: null,
+    status: ""
 }
 
 const profileReducer = (state = initialState, action) => {
@@ -42,11 +44,14 @@ const profileReducer = (state = initialState, action) => {
             }
         case SET_USER_PROFILE:
             return { ...state, profile: action.profile }
+        case SET_STATUS:
+            return { ...state, status: action.status }
         default:
             return state;
     }
 }
 
+// actionCreator(и):
 export const addPostActionCreator = () => ({
     type: ADD_POST
 })
@@ -56,6 +61,10 @@ export const updateNewPostTextActionCreator = (text) =>
 export const setUserProfile = (profile) => ({
     type: SET_USER_PROFILE, profile
 })
+export const setStatus = (status) => ({
+    type: SET_STATUS, status
+})
+
 
 // thunk для конкретного користувача
 export const getUserProfile = (userId) => (dispatch) => {
@@ -65,6 +74,29 @@ export const getUserProfile = (userId) => (dispatch) => {
             // засетити userProfile з сервера
             dispatch(setUserProfile(response.data));
         });
+}
+
+// thunk для отримання статуса конкретного користувача
+export const getStatus = (userId) => (dispatch) => {
+    // запит на сервер з api.is для отримання статуса
+    profileAPI.getStatus(userId)
+        .then(response => {
+            // засетити status з сервера
+            dispatch(setStatus(response.data))
+        })
+}
+
+// thunk для оновлення статуса конкретного користувача
+export const updateStatus = (status) => (dispatch) => {
+    // надіслати на сервер статус з текстом(статусом)
+    profileAPI.updateStatus(status)
+        .then(response => {
+            // якщо з сервера прийде відповідь "0" (все добре)
+            if (response.data.resultCode === 0) {
+                // засетити status 
+                dispatch(setStatus(status))
+            }
+        })
 }
 
 export default profileReducer;
