@@ -41,7 +41,8 @@ class ProfileStatus extends React.Component {
                 {/* якщо editMode: false - відобразить Status */}
                 {!this.state.editMode &&
                     <div>
-                        <span className={s.status} onDoubleClick={this.activateEditMode}>Status: {this.props.status}</span>
+                        {/* відобразити this.props.status, якщо немає, то відобразити "-----" */}
+                        <span className={s.status} onDoubleClick={this.activateEditMode}>Status: {this.props.status || "-----"}</span>
                     </div>
                 }
                 {/* якщо editMode: true - відобразить input */}

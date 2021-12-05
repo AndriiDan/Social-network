@@ -13,7 +13,7 @@ class ProfileContainer extends React.Component {
     let userId = this.props.match.params.userId;
     // якщо url "/profile" відобразити як при "/profile/2"
     if (!userId) {
-      userId = 2;
+      userId = 1049;
     }
 
     // запит на сервер, засетити (відобразити) конкретного юзера (userProfile) з сервера
