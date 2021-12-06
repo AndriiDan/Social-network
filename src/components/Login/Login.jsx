@@ -2,7 +2,8 @@ import React from 'react';
 import { Field, reduxForm } from 'redux-form';
 
 const LoginForm = (props) => {
-    return <form>
+    // {props.handleSubmit} приходять з reduxForm "під капотом"
+    return <form onSubmit={props.handleSubmit}>
         <div>
             <Field placeholder={"Login"} name={"login"} component={"input"} />
         </div>
@@ -21,9 +22,14 @@ const LoginForm = (props) => {
 const LoginReduxform = reduxForm({ form: 'login' })(LoginForm)
 
 const Login = (props) => {
+    // функція, в яку приходять дані з форми
+    const onSubmit = (formData) => {
+        // при заповненні і відправленні форми в консолі модна подивитися дані 
+        console.log(formData)
+    }
     return <div>
         <h1>LOGIN</h1>
-        <LoginReduxform />
+        <LoginReduxform onSubmit={onSubmit} />
     </div>
 }
 
