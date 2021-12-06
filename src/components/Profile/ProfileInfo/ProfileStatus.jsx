@@ -35,6 +35,18 @@ class ProfileStatus extends React.Component {
     // виділення тексту в input при doubleClick по status
     handleFocus = (event) => { event.target.select() }
 
+    // оновлення статуса при зміні props (синхронізація локального і глобального state)
+    componentDidUpdate(prevProps, prevStatus) {
+        // якщо попередній статус не рівний прийшовшому з пропсів, то
+        if (prevProps.status !== this.props.status) {
+            // засетити статус рівний статусу з пропсів
+            this.setState({
+                status: this.props.status
+            });
+        }
+    }
+
+
     render() {
         return (
             <div>
