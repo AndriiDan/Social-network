@@ -1,4 +1,5 @@
 import React from 'react';
+import { Field, reduxForm } from 'redux-form';
 import DialogItem from './DialogItem/DialogItem';
 import s from './Dialogs.module.css';
 import Message from './Message/Message';
@@ -21,6 +22,11 @@ const Dialogs = (props) => {
         props.updateNewMessageBody(body);
     }
 
+    // ф-ція, яка виводить зібрані дані з форми
+    let addNewMessage = (values) => {
+        alert(values.newMessageBody)
+    }
+
     return (
         <div className={s.dialogs}>
             <div className={s.dialogsElements}>
@@ -28,20 +34,27 @@ const Dialogs = (props) => {
             </div>
             <div className={s.messages}>
                 <div>{messagesElements}</div>
-                <div>
-                    <div>
-                        <textarea value={newMessageBody}
-                            // щоб змінювалося value, необхідний onChange (приходить з BLL)
-                            onChange={onNewMessageChange}
-                            placeholder='Enter your message'></textarea>
-                    </div>
-                    <div>
-                        <button onClick={onSendMessageClick}>Send</button>
-                    </div>
-                </div>
+                {/* onSubmit={addNewMessage} зібрані дані з форми AddMessageForm чепез onSubmit */}
+                <AddMessageFormRedux onSubmit={addNewMessage} />
             </div>
         </div>
     )
 }
+
+// компонента форми
+const AddMessageForm = (props) => {
+    return (
+        <form onSubmit={props.handleSubmit}>
+            <div>
+                <Field component="textarea" name="newMessageBody" placeholder="Enter your message" />
+            </div>
+            <div>
+                <button>Send</button>
+            </div>
+        </form>
+    )
+}
+
+const AddMessageFormRedux = reduxForm({ form: "dialogAddMessageForm" })(AddMessageForm)
 
 export default Dialogs;
