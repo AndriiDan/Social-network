@@ -1,5 +1,4 @@
 const SEND_MESSAGE = 'SEND_MESSAGE';
-const UPDATE_NEW_MESSAGE_BODY = 'UPDATE_NEW_MESSAGE_BODY';
 
 let initialState = {
     dialogs: [
@@ -19,12 +18,6 @@ let initialState = {
 
 const dialogsReducer = (state = initialState, action) => {
     switch (action.type) {
-        case UPDATE_NEW_MESSAGE_BODY:
-            return {
-                // // створюю копію state
-                ...state,
-                newMessageBody: action.body
-            };
         // надіслати повідомлення
         case SEND_MESSAGE:
             // newMessageBody беремо з action(a) sendMessageCreator
@@ -45,7 +38,5 @@ export const sendMessageCreator = (newMessageBody) => ({
     // newMessageBody - це action
     type: SEND_MESSAGE, newMessageBody
 })
-export const updateNewMessageBodyCreator = (body) =>
-    ({ type: UPDATE_NEW_MESSAGE_BODY, body: body })
 
 export default dialogsReducer;

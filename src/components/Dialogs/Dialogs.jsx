@@ -11,16 +11,7 @@ const Dialogs = (props) => {
     let messagesElements = state.messages.map(m => <Message message={m.message} />)
 
     // Приходить з state
-    let newMessageBody = state.newMessageBody;
-
-    // коли відбулася подія. іде в BLL - далі з BLL приходить новий value (newMessageBody)
-    let onSendMessageClick = () => {
-        props.sendMessage();
-    }
-    let onNewMessageChange = (e) => {
-        let body = e.target.value;
-        props.updateNewMessageBody(body);
-    }
+    // let newMessageBody = state.newMessageBody;
 
     // ф-ція, яка виводить зібрані дані з форми
     let addNewMessage = (values) => {
