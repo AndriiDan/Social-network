@@ -2,7 +2,7 @@ import { profileAPI, usersAPI } from "../api/api";
 
 // використовуємо константи замість рядків для мінімізації помилки в написання
 const ADD_POST = 'ADD-POST';
-const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
+// const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
 const SET_USER_PROFILE = 'SET_USER_PROFILE';
 const SET_STATUS = 'SET_STATUS';
 
@@ -13,25 +13,26 @@ let initialState = {
         { id: 2, message: 'It\'s my first post.', likesCount: 20 }
     ],
     // стартове значення в полі вводу в text
-    newPostText: 'it-kamasutra.com',
+    // newPostText: 'it-kamasutra.com',
     profile: null,
     status: ""
 }
 
 const profileReducer = (state = initialState, action) => {
     switch (action.type) {
-        case UPDATE_NEW_POST_TEXT:
-            return {
-                // створюю копію state
-                ...state,
-                newPostText: action.newText
-            }
+        // case UPDATE_NEW_POST_TEXT:
+        //     return {
+        //         // створюю копію state
+        //         ...state,
+        //         newPostText: action.newText
+        //     }
         case ADD_POST:
             // формує новий пост за зразком posts-масиву
             let newPost = {
                 id: 3,
                 // значення з 
-                message: state.newPostText,
+                // message: state.newPostText,
+                message: action.newPostText,
                 likesCount: 0
             };
             return {
@@ -52,11 +53,11 @@ const profileReducer = (state = initialState, action) => {
 }
 
 // actionCreator(и):
-export const addPostActionCreator = () => ({
-    type: ADD_POST
+export const addPostActionCreator = (newPostText) => ({
+    type: ADD_POST, newPostText
 })
-export const updateNewPostTextActionCreator = (text) =>
-    ({ type: UPDATE_NEW_POST_TEXT, newText: text })
+// export const updateNewPostTextActionCreator = (text) =>
+//     ({ type: UPDATE_NEW_POST_TEXT, newText: text })
 
 export const setUserProfile = (profile) => ({
     type: SET_USER_PROFILE, profile
