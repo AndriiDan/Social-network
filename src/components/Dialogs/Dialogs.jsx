@@ -24,7 +24,8 @@ const Dialogs = (props) => {
 
     // ф-ція, яка виводить зібрані дані з форми
     let addNewMessage = (values) => {
-        alert(values.newMessageBody)
+        // передати отримані дані в sendMessage; sendMessage приходить з <DialogsContainer />; values.newMessageBody приходить з <AddMessageForm />
+        props.sendMessage(values.newMessageBody)
     }
 
     return (

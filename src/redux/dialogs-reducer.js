@@ -14,8 +14,7 @@ let initialState = {
         { id: 1, message: 'Hi' },
         { id: 2, message: 'How is your ReactJS?' },
         { id: 3, message: 'Прогресує.' }
-    ],
-    newMessageBody: ''
+    ]
 }
 
 const dialogsReducer = (state = initialState, action) => {
@@ -26,23 +25,25 @@ const dialogsReducer = (state = initialState, action) => {
                 ...state,
                 newMessageBody: action.body
             };
+        // надіслати повідомлення
         case SEND_MESSAGE:
-            let body = state.newMessageBody;
+            // newMessageBody беремо з action(a) sendMessageCreator
+            let body = action.newMessageBody;
             return {
                 // створюю копію state
                 ...state,
                 // створюю копію messages і додаю в кінець нове повідомлення (аналогічно як push)
                 messages: [...state.messages, { id: 4, message: body }],
-                // обнуляю поле вводу
-                newMessageBody: ''
             };
         default:
             return state;
     }
 }
 
-export const sendMessageCreator = () => ({
-    type: SEND_MESSAGE
+// sendMessageCreator - це actionCreator; newMessageBody приходить з DialogsContainer.jsx з mapDispatchToProps
+export const sendMessageCreator = (newMessageBody) => ({
+    // newMessageBody - це action
+    type: SEND_MESSAGE, newMessageBody
 })
 export const updateNewMessageBodyCreator = (body) =>
     ({ type: UPDATE_NEW_MESSAGE_BODY, body: body })

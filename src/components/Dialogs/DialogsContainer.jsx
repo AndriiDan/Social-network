@@ -17,8 +17,10 @@ let mapDispatchToProps = (dispatch) => {
         updateNewMessageBody: (body) => {
             dispatch(updateNewMessageBodyCreator(body))
         },
-        sendMessage: () => {
-            dispatch(sendMessageCreator())
+        // newMessageBody приходить з <Dialogs />
+        sendMessage: (newMessageBody) => {
+            // sendMessageCreator (actionCreator) приходить з dialogs-reducer.js
+            dispatch(sendMessageCreator(newMessageBody))
         }
     }
 }
