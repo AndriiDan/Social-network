@@ -5,6 +5,7 @@ const LoginForm = (props) => {
     // {props.handleSubmit} приходять з reduxForm "під капотом"
     return <form onSubmit={props.handleSubmit}>
         <div>
+            {/* Field замість input, щоб form реагувала на onChange */}
             <Field placeholder={"Login"} name={"login"} component={"input"} />
         </div>
         <div>
@@ -22,9 +23,9 @@ const LoginForm = (props) => {
 const LoginReduxform = reduxForm({ form: 'login' })(LoginForm)
 
 const Login = (props) => {
-    // функція, в яку приходять дані з форми
+    // функція, в яку приходять дані з форми. formData - це об'єкт з даними, які були заповнені у form
     const onSubmit = (formData) => {
-        // при заповненні і відправленні форми в консолі модна подивитися дані 
+        // при заповненні і відправленні форми в консолі можна подивитися дані, які були заповнені у form
         console.log(formData)
     }
     return <div>
