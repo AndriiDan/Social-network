@@ -11,8 +11,8 @@ export const Textarea = ({ input, meta, ...props }) => {
             <div>
                 <textarea {...input} {...props} />
             </div>
-            {/* якщо виконується умова помилки, показати span */}
-            { hasError && <span>"some error"</span>}
+            {/* якщо виконується умова помилки, показати span. Текст помилки міститься в  meta.error */}
+            { hasError && <span>{meta.error}</span>}
         </div>
     )
 }
