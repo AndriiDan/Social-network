@@ -1,5 +1,5 @@
 import React from 'react';
-import AddMessageFormRedux from './AddMessageForm/AddMessageForm';
+import AddMessageForm from './AddMessageForm/AddMessageForm';
 import DialogItem from './DialogItem/DialogItem';
 import s from './Dialogs.module.css';
 import Message from './Message/Message';
@@ -24,7 +24,7 @@ const Dialogs = (props) => {
             <div className={s.messages}>
                 <div>{messagesElements}</div>
                 {/* onSubmit={addNewMessage} зібрані дані з форми AddMessageForm чепез onSubmit */}
-                <AddMessageFormRedux onSubmit={addNewMessage} />
+                <AddMessageForm onSubmit={addNewMessage} />
             </div>
         </div>
     )
