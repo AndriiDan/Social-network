@@ -1,6 +1,6 @@
 import React from 'react';
 import { Field, reduxForm } from 'redux-form';
-import { maxLength10, required } from '../../../utils/validators/validators';
+import { maxLengthCreator, required } from '../../../utils/validators/validators';
 import s from './MyPosts.module.css'
 import Post from './Post/Post';
 
@@ -24,13 +24,18 @@ const MyPosts = (props) => {
   </div>
 }
 
+// константа для максимальної довжини в 10 символів 
+const maxLength10 = maxLengthCreator(10);
+
 const AddNewPostForm = (props) => {
   return (
     <form onSubmit={props.handleSubmit}>
       <div>
         {/* введене значення користувачем */}
         {/* validate: required - обов'язово заповнити; maxLength10 - макс. к-сть символів */}
-        <Field component="textarea" name="newPostText" placeholder="Enter your post" validate={[required, maxLength10]} />
+        <Field component="textarea" name="newPostText" placeholder="Enter your post"
+          validate={[required, maxLength10]}
+        />
       </div>
       <div>
         <button>Add post</button>
