@@ -1,5 +1,7 @@
 import React from 'react';
 import { Field, reduxForm } from 'redux-form';
+import { maxLengthCreator, required } from '../../utils/validators/validators';
+import { Textarea } from '../common/FormsControls/FormsControls';
 import DialogItem from './DialogItem/DialogItem';
 import s from './Dialogs.module.css';
 import Message from './Message/Message';
@@ -30,12 +32,18 @@ const Dialogs = (props) => {
     )
 }
 
+
+// константа для максимальної довжини в 50 символів 
+const maxLength50 = maxLengthCreator(50);
+
 // компонента форми
 const AddMessageForm = (props) => {
     return (
         <form onSubmit={props.handleSubmit}>
             <div>
-                <Field component="textarea" name="newMessageBody" placeholder="Enter your message" />
+                {/* введене значення користувачем */}
+                {/* validate: required - обов'язово заповнити; maxLength50 - макс. к-сть символів */}
+                <Field component={Textarea} validate={[required, maxLength50]} name="newMessageBody" placeholder="Enter your message" />
             </div>
             <div>
                 <button>Send</button>
