@@ -1,5 +1,6 @@
 import React from 'react';
 import { Field, reduxForm } from 'redux-form';
+import { required } from '../../../utils/validators/validators';
 import s from './MyPosts.module.css'
 import Post from './Post/Post';
 
@@ -28,7 +29,8 @@ const AddNewPostForm = (props) => {
     <form onSubmit={props.handleSubmit}>
       <div>
         {/* введене значення користувачем */}
-        <Field component="textarea" name="newPostText" placeholder="Enter your post" />
+        {/* validate={[required]} - обов'язово заповнити */}
+        <Field component="textarea" name="newPostText" placeholder="Enter your post" validate={[required]} />
       </div>
       <div>
         <button>Add post</button>
