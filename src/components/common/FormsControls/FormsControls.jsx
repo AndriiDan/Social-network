@@ -3,9 +3,16 @@ import styles from './FormsControls.module.css';
 
 // ({ input, meta, ...props }) деструкторизація props. В ...props відсутні input, meta.
 export const Textarea = ({ input, meta, ...props }) => {
+    // умова помилки: якщо була взаємодія з елементом і є помилка (умава валідації)
+    const hasError = meta.touched && meta.error;
     return (
-        <div className={styles.formControl + " " + styles.error}>
-            <textarea {...input} {...props} />
+        // додає стилі. (hasError ? styles.error : "") - якщо виконується умова помилки, додати styles.error, якщо ні - додати пустий рядок
+        <div className={styles.formControl + " " + (hasError ? styles.error : "")}>
+            <div>
+                <textarea {...input} {...props} />
+            </div>
+            {/* якщо виконується умова помилки, показати span */}
+            { hasError && <span>"some error"</span>}
         </div>
     )
 }
