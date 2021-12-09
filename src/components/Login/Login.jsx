@@ -1,15 +1,21 @@
 import React from 'react';
 import { Field, reduxForm } from 'redux-form';
+import { required } from '../../utils/validators/validators';
+import { Input } from '../common/FormsControls/FormsControls';
 
 const LoginForm = (props) => {
     // {props.handleSubmit} приходять з reduxForm "під капотом"
     return <form onSubmit={props.handleSubmit}>
         <div>
             {/* Field замість input, щоб form реагувала на onChange */}
-            <Field placeholder={"Login"} name={"login"} component={"input"} />
+            {/* validate={required} - поле повинно бути заповнено 
+            component={Input} - компонент форми Input */}
+            <Field placeholder={"Login"} name={"login"}
+                validate={required} component={Input} />
         </div>
         <div>
-            <Field placeholder={"Password"} name={"password"} component={"input"} />
+            <Field placeholder={"Password"} name={"password"}
+                validate={required} component={Input} />
         </div>
         <div>
             <Field type={"checkbox"} name={"rememberMe"} component={"input"} /> remember me
