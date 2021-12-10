@@ -23,7 +23,7 @@ const authReducer = (state = initialState, action) => {
 }
 
 export const setAuthUserData = (userId, email, login, isAuth) =>
-    ({ type: SET_USER_DATE, payload: { userId, email, login, isAuth } })
+    ({ type: SET_USER_DATA, payload: { userId, email, login, isAuth } })
 
 // thunk для авторизації
 export const getAuthUserData = () => (dispatch) => {
