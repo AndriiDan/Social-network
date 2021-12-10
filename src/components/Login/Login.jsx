@@ -1,5 +1,7 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
+import { login } from '../../redux/auth-reducer';
 import { required } from '../../utils/validators/validators';
 import { Input } from '../common/FormsControls/FormsControls';
 
@@ -10,12 +12,12 @@ const LoginForm = (props) => {
             {/* Field замість input, щоб form реагувала на onChange */}
             {/* validate={required} - поле повинно бути заповнено 
             component={Input} - компонент форми Input */}
-            <Field placeholder={"Login"} name={"login"}
+            <Field placeholder={"Email"} name={"email"}
                 validate={required} component={Input} />
         </div>
         <div>
             <Field placeholder={"Password"} name={"password"}
-                validate={required} component={Input} />
+                validate={required} component={Input} type={"password"} />
         </div>
         <div>
             <Field type={"checkbox"} name={"rememberMe"} component={"input"} /> remember me
@@ -31,8 +33,9 @@ const LoginReduxform = reduxForm({ form: 'login' })(LoginForm)
 const Login = (props) => {
     // функція, в яку приходять дані з форми. formData - це об'єкт з даними, які були заповнені у form
     const onSubmit = (formData) => {
-        // при заповненні і відправленні форми в консолі можна подивитися дані, які були заповнені у form
-        console.log(formData)
+        // props.login - це callback повернутий connect(ом) після (під час) оброблення thunk{login}
+        // з formData дістаємо email, password, rememberMe
+        props.login(formData.email, formData.password, formData.rememberMe);
     }
     return <div>
         <h1>LOGIN</h1>
@@ -40,4 +43,5 @@ const Login = (props) => {
     </div>
 }
 
-export default Login;
+// Login обернений connect(ом) і прокинутий thunk{login}
+export default connect(null, { login })(Login);
