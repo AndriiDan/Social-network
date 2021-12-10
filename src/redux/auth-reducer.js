@@ -1,6 +1,6 @@
 import { authAPI } from "../api/api";
 
-const SET_USER_DATE = 'SET_USER_DATE';
+const SET_USER_DATA = 'SET_USER_DATE';
 
 let initialState = {
     id: null,
@@ -11,11 +11,11 @@ let initialState = {
 
 const authReducer = (state = initialState, action) => {
     switch (action.type) {
-        case SET_USER_DATE:
+        case SET_USER_DATA:
             return {
                 ...state,
                 ...action.payload,
-                // isAuth: true
+                isAuth: true
             };
         default:
             return state;
@@ -42,7 +42,7 @@ export const login = (email, password, rememberMe) => (dispatch) => {
         .then(response => {
             if (response.data.resultCode === 0) {
                 // dispatch - внесення даних авторизації (з formData) 
-                dispatch(setAuthUserData());
+                dispatch(getAuthUserData());
             }
         });
 }
