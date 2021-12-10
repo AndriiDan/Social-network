@@ -57,5 +57,13 @@ export const authAPI = {
     // авторизація
     me() {
         return instance.get(`auth/me`)
+    },
+    // login - відправлення email та password
+    login(email, password, rememberMe = false) {
+        return instance.post(`auth/login`, { email, password, rememberMe });
+    },
+    // logout - вихід з акаунта
+    logout() {
+        return instance.delete(`auth/login`);
     }
 }

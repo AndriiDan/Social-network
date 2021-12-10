@@ -14,16 +14,16 @@ const authReducer = (state = initialState, action) => {
         case SET_USER_DATE:
             return {
                 ...state,
-                ...action.date,
-                isAuth: true
+                ...action.payload,
+                // isAuth: true
             };
         default:
             return state;
     }
 }
 
-export const setAuthUserData = (userId, email, login) =>
-    ({ type: SET_USER_DATE, date: { userId, email, login } })
+export const setAuthUserData = (userId, email, login, isAuth) =>
+    ({ type: SET_USER_DATE, payload: { userId, email, login, isAuth } })
 
 // thunk для авторизації
 export const getAuthUserData = () => (dispatch) => {
@@ -31,7 +31,29 @@ export const getAuthUserData = () => (dispatch) => {
         .then(response => {
             if (response.data.resultCode === 0) {
                 let { id, email, login } = response.data.data;
-                dispatch(setAuthUserData(id, email, login));
+                dispatch(setAuthUserData(id, email, login, true));
+            }
+        });
+}
+
+// thunk для авторизації login
+export const login = (email, password, rememberMe) => (dispatch) => {
+    authAPI.login(email, password, rememberMe)
+        .then(response => {
+            if (response.data.resultCode === 0) {
+                // dispatch - внесення даних авторизації (з formData) 
+                dispatch(setAuthUserData());
+            }
+        });
+}
+
+// thunk для logout
+export const logout = () => (dispatch) => {
+    authAPI.logout()
+        .then(response => {
+            if (response.data.resultCode === 0) {
+                // dispatch - видалення (обнулення) даних авторизації 
+                dispatch(setAuthUserData(null, null, null, false));
             }
         });
 }
