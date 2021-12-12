@@ -40,15 +40,21 @@ export const getAuthUserData = () => (dispatch) => {
 export const login = (email, password, rememberMe) => (dispatch) => {
 
     // зупинка форми (LoginReduxform = reduxForm({ form: 'login' })(LoginForm)); помилка по LoginForm - <Field name={"email"}
-    let action = stopSubmit("login", { _error: "Common error" });
-    dispatch(action);
-    return;
+    // let action = stopSubmit("login", { _error: "Common error" });
+    // dispatch(action);
+    // return;
 
     authAPI.login(email, password, rememberMe)
         .then(response => {
+            // якщо resultCode === 0, то авторизуватися
             if (response.data.resultCode === 0) {
                 // dispatch - внесення даних авторизації (з formData) 
                 dispatch(getAuthUserData());
+            } else {
+                // інакше, зупинка форми (LoginReduxform = reduxForm({ form: 'login' })(LoginForm)); помилка по LoginForm - <Field name={"email"}
+                // якщо messages.length > 0 відобразити response.data.messages, інакше - повідомлення "Some error"
+                let message = response.data.messages.length > 0 ? response.data.messages : "Some error";
+                dispatch(stopSubmit("login", { _error: message }))
             }
         });
 }
