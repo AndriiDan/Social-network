@@ -24,8 +24,13 @@ const LoginForm = (props) => {
         <div>
             <Field type={"checkbox"} name={"rememberMe"} component={"input"} /> remember me
         </div>
+
         {/* відображення помилки вводу email або password */}
-        <div className={style.formSummeryError}>{props.error}</div>
+        {props.error && <div className={style.formSummeryError}>
+            {props.error}
+        </div>
+        }
+
         <div>
             <button>Login</button>
         </div>
