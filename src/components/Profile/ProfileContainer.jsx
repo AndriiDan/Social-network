@@ -14,7 +14,9 @@ class ProfileContainer extends React.Component {
     // якщо url "/profile" відобразити як при "/profile/2"
     if (!userId) {
       // мій Id на social-network.samuraijs.com
-      userId = 20926;
+      // userId = 20926;
+      // userId береться з авторизаційних даних
+      userId = this.props.authorizedUserId;
     }
 
     // запит на сервер, засетити (відобразити) конкретного юзера (userProfile) з сервера
@@ -36,7 +38,9 @@ class ProfileContainer extends React.Component {
 let mapStateToProps = (state) => ({
   // запит у state значення profile
   profile: state.profilePage.profile,
-  status: state.profilePage.status
+  status: state.profilePage.status,
+  authorizedUserId: state.auth.userId,
+  isAuth: state.auth.isAuth
 });
 
 // слої поверх ProfileContainer, починаючи з низу: withAuthRedirect, withRouter, connect
