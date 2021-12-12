@@ -40,7 +40,7 @@ export const getAuthUserData = () => (dispatch) => {
 export const login = (email, password, rememberMe) => (dispatch) => {
 
     // зупинка форми (LoginReduxform = reduxForm({ form: 'login' })(LoginForm)); помилка по LoginForm - <Field name={"email"}
-    let action = stopSubmit("login", { email: "Email is wrong." });
+    let action = stopSubmit("login", { _error: "Common error" });
     dispatch(action);
     return;
 

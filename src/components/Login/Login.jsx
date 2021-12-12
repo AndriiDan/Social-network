@@ -5,6 +5,7 @@ import { Field, reduxForm } from 'redux-form';
 import { login } from '../../redux/auth-reducer';
 import { required } from '../../utils/validators/validators';
 import { Input } from '../common/FormsControls/FormsControls';
+import style from '../common/FormsControls/FormsControls.module.css'
 
 const LoginForm = (props) => {
     // {props.handleSubmit} приходять з reduxForm "під капотом"
@@ -22,7 +23,9 @@ const LoginForm = (props) => {
         </div>
         <div>
             <Field type={"checkbox"} name={"rememberMe"} component={"input"} /> remember me
-            </div>
+        </div>
+        {/* відображення помилки вводу email або password */}
+        <div className={style.formSummeryError}>{props.error}</div>
         <div>
             <button>Login</button>
         </div>
