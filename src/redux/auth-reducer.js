@@ -1,3 +1,4 @@
+import { stopSubmit } from "redux-form";
 import { authAPI } from "../api/api";
 
 const SET_USER_DATA = 'SET_USER_DATE';
@@ -37,6 +38,12 @@ export const getAuthUserData = () => (dispatch) => {
 
 // thunk для авторизації login
 export const login = (email, password, rememberMe) => (dispatch) => {
+
+    // зупинка форми (LoginReduxform = reduxForm({ form: 'login' })(LoginForm)); помилка по LoginForm - <Field name={"email"}
+    let action = stopSubmit("login", { email: "Email is wrong." });
+    dispatch(action);
+    return;
+
     authAPI.login(email, password, rememberMe)
         .then(response => {
             if (response.data.resultCode === 0) {
