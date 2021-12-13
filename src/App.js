@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route } from 'react-router-dom';
+import { Route, withRouter } from 'react-router-dom';
 import './App.css';
 import Music from './components/Music/Music';
 import Navbar from './components/Navbar/Navbar';
@@ -13,6 +13,7 @@ import HeaderContainer from './components/Header/HeaderContainer';
 import Login from './components/Login/Login';
 import { connect } from 'react-redux';
 import { getAuthUserData } from './redux/auth-reducer';
+import { compose } from 'redux';
 
 class App extends React.Component {
 
@@ -52,4 +53,7 @@ class App extends React.Component {
     }
 }
 
-export default connect(null, { getAuthUserData })(App);
+export default compose(
+    // при використанні Route і connect додатково краще обернути withRouter, тому що інколи збиваються роути
+    withRouter,
+    connect(null, { getAuthUserData }))(App);
