@@ -27,5 +27,5 @@ export default compose(
     connect(mapStateToProps, mapDispatchToProps),
     // перевірки авторизації з HOC withAuthRedirect
     // тимчасово закоментую, щось перенаправляє на login після відправлення повідомлення (урок 76)
-    // withAuthRedirect
+    withAuthRedirect
 )(Dialogs);

@@ -12,14 +12,14 @@ import ProfileContainer from './components/Profile/ProfileContainer';
 import HeaderContainer from './components/Header/HeaderContainer';
 import Login from './components/Login/Login';
 import { connect } from 'react-redux';
-import { getAuthUserData } from './redux/auth-reducer';
 import { compose } from 'redux';
+import { initializeApp } from './redux/app-reducer';
 
 class App extends React.Component {
 
     componentDidMount() {
         // запит на сервер, авторизація
-        this.props.getAuthUserData();
+        this.props.initializeApp();
     }
 
     render() {
@@ -53,7 +53,12 @@ class App extends React.Component {
     }
 }
 
+const mapDispatchToProps = (state) => ({
+    // значення чи успішна ініціалізація initialized (true, false)
+    initialized: state.app.initialized
+})
+
 export default compose(
     // при використанні Route і connect додатково краще обернути withRouter, тому що інколи збиваються роути
     withRouter,
-    connect(null, { getAuthUserData }))(App);
+    connect(mapDispatchToProps, { initializeApp }))(App);

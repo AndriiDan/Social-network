@@ -27,7 +27,8 @@ export const setAuthUserData = (userId, email, login, isAuth) =>
 
 // thunk для авторизації
 export const getAuthUserData = () => (dispatch) => {
-    authAPI.me()
+    // return для повернення промісу для initializedSuccess в app-reducer.js
+    return authAPI.me()
         .then(response => {
             if (response.data.resultCode === 0) {
                 let { id, email, login } = response.data.data;
