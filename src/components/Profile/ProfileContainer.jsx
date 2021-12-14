@@ -13,10 +13,15 @@ class ProfileContainer extends React.Component {
     let userId = this.props.match.params.userId;
     // якщо url "/profile" відобразити як при "/profile/2"
     if (!userId) {
+      debugger
       // мій Id на social-network.samuraijs.com
       // userId = 20926;
       // userId береться з авторизаційних даних
       userId = this.props.authorizedUserId;
+      // якщо і в authorizedUserId немає userId, то зробити Redirect через history.push
+      if (!userId) {
+        this.props.history.push("/login");
+      }
     }
 
     // запит на сервер, засетити (відобразити) конкретного юзера (userProfile) з сервера

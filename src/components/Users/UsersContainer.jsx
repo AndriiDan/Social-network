@@ -76,6 +76,6 @@ let mapStateToProps = (state) => {
 // слої поверх UsersContainer, починаючи з низу: connect, withAuthRedirect
 export default compose(
     // перевірки авторизації
-    withAuthRedirect,
+    // withAuthRedirect,
     connect(mapStateToProps, { follow, unfollow, setCurrentPage, toggleFollowingProgress, getUsers })
 )(UsersContainer);
