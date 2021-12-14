@@ -14,6 +14,7 @@ import Login from './components/Login/Login';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { initializeApp } from './redux/app-reducer';
+import Preloader from './components/common/Preloader/Preloader';
 
 class App extends React.Component {
 
@@ -23,6 +24,11 @@ class App extends React.Component {
     }
 
     render() {
+        // якщо не ініціалізовано, то відобразити крутилку
+        if (!this.props.initialized) {
+            return <Preloader />
+        }
+
         return (
             <div className="app-audi" >
                 <HeaderContainer />
