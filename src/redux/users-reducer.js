@@ -118,6 +118,9 @@ export const requestUsers = (currentPage, pageSize) => {
     return (dispatch) => {
         // для відображення анімації при відправленні запиту
         dispatch(toggleIsFetching(true));
+        // відображати активний номер сторінки користувачів
+        dispatch(setCurrentPage(currentPage));
+
         // getUsers - get-запит
         usersAPI.getUsers(currentPage, pageSize)
             .then(data => {
@@ -127,8 +130,6 @@ export const requestUsers = (currentPage, pageSize) => {
                 dispatch(setUsers(data.items));
                 // засетити загальну к-сть юзерів
                 dispatch(setTotalUsersCount(data.totalCount));
-                // відображати активний номер сторінки користувачі
-                dispatch(setCurrentPage(currentPage));
             });
     }
 }
