@@ -1,47 +1,21 @@
 import React from 'react';
 import { connect } from 'react-redux';
-// import { follow, setCurrentPage, setUsers, setTotalUsersCount, toggleIsFetching, unfollow, toggleFollowingProgress, getUsers } from '../../redux/users-reducer'; // видалити
-import { follow, setCurrentPage, unfollow, toggleFollowingProgress, getUsers } from '../../redux/users-reducer';
+import { follow, setCurrentPage, unfollow, toggleFollowingProgress, requestUsers } from '../../redux/users-reducer';
 import Users from './Users';
 import Preloader from '../common/Preloader/Preloader';
 import { withAuthRedirect } from '../../hoc/withAuthRedirect';
 import { compose } from 'redux';
-// import { usersAPI } from '../../api/api'; // видалити
+import { getUsers } from '../../redux/users-selectors';
 
 class UsersContainer extends React.Component {
 
     componentDidMount() {
-        this.props.getUsers(this.props.currentPage, this.props.pageSize);
-
-        // // для відображення анімації при відправленні запиту
-        // this.props.toggleIsFetching(true);
-        // // getUsers - get-запит
-        // usersAPI.getUsers(this.props.currentPage, this.props.pageSize)
-        //     .then(data => {
-        //         // для завершення відображення анімації після запиту   
-        //         this.props.toggleIsFetching(false);
-        //         // засетити users
-        //         this.props.setUsers(data.items);
-        //         // засетити загальну к-сть юзерів
-        //         this.props.setTotalUsersCount(data.totalCount);
-        //     });
+        this.props.requestUsers(this.props.currentPage, this.props.pageSize);
     }
 
     // метод, для обробника подій onClick - для зміни номера сторінки users, + запит на сервер 
     onPageChanged = (pageNumber) => {
-        this.props.getUsers(pageNumber, this.props.pageSize);
-
-        // // для відображення анімації при відправленні запиту
-        // this.props.setCurrentPage(pageNumber);
-        // this.props.toggleIsFetching(true);
-        // // getUsers - get-запит
-        // usersAPI.getUsers(pageNumber, this.props.pageSize)
-        //     // axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`, { withCredentials: true })
-        //     .then(data => {
-        //         // для завершення відображення анімації після запиту
-        //         this.props.toggleIsFetching(false);
-        //         this.props.setUsers(data.items);
-        //     });
+        this.props.requestUsers(pageNumber, this.props.pageSize);
     }
 
     render() {
@@ -64,7 +38,7 @@ class UsersContainer extends React.Component {
 let mapStateToProps = (state) => {
     return {
         // прокидуємо з users-reducer.js
-        users: state.usersPage.users,
+        users: getUsers(state),
         pageSize: state.usersPage.pageSize,
         totalUsersCount: state.usersPage.totalUsersCount,
         currentPage: state.usersPage.currentPage,
@@ -77,5 +51,5 @@ let mapStateToProps = (state) => {
 export default compose(
     // перевірки авторизації
     // withAuthRedirect,
-    connect(mapStateToProps, { follow, unfollow, setCurrentPage, toggleFollowingProgress, getUsers })
+    connect(mapStateToProps, { follow, unfollow, setCurrentPage, toggleFollowingProgress, requestUsers })
 )(UsersContainer);
