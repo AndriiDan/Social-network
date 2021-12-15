@@ -114,15 +114,15 @@ export const toggleFollowingProgress = (isFetching, userId) => ({
 })
 
 // ThunkCreator
-export const requestUsers = (currentPage, pageSize) => {
+export const requestUsers = (page, pageSize) => {
     return (dispatch) => {
         // для відображення анімації при відправленні запиту
         dispatch(toggleIsFetching(true));
         // відображати активний номер сторінки користувачів
-        dispatch(setCurrentPage(currentPage));
+        dispatch(setCurrentPage(page));
 
         // getUsers - get-запит
-        usersAPI.getUsers(currentPage, pageSize)
+        usersAPI.getUsers(page, pageSize)
             .then(data => {
                 // для завершення відображення анімації після запиту 
                 dispatch(toggleIsFetching(false));
