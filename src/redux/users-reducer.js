@@ -21,11 +21,17 @@ let initialState = {
     // для відображення анімації при оновленні або запиті
     isFetching: true,
     // для блокування кнопки при відправленні запиту
-    followingInProgress: []
+    followingInProgress: [],
+    // фейкове значення для перевірки урок 82
+    fake: 10
 }
 
 const usersReducer = (state = initialState, action) => {
     switch (action.type) {
+
+        // фейкове значення для перевірки урок 82
+        case "FAKE": return { ...state, fake: state.fake + 1 };
+
         case FOLLOW:
             return {
                 ...state,

@@ -13,7 +13,7 @@ class ProfileContainer extends React.Component {
     let userId = this.props.match.params.userId;
     // якщо url "/profile" відобразити як при "/profile/2"
     if (!userId) {
-      debugger
+
       // мій Id на social-network.samuraijs.com
       // userId = 20926;
       // userId береться з авторизаційних даних
@@ -32,6 +32,10 @@ class ProfileContainer extends React.Component {
   }
 
   render() {
+
+    // вивести в консоль кожний запуск mapStateToProps
+    console.log('RENDER PROFILE')
+
     return (
       <div>
         <Profile {...this.props} profile={this.props.profile} status={this.props.status} updateStatus={this.props.updateStatus} />
@@ -40,13 +44,19 @@ class ProfileContainer extends React.Component {
   }
 }
 
-let mapStateToProps = (state) => ({
-  // запит у state значення profile
-  profile: state.profilePage.profile,
-  status: state.profilePage.status,
-  authorizedUserId: state.auth.userId,
-  isAuth: state.auth.isAuth
-});
+let mapStateToProps = (state) => {
+
+  // вивести в консоль кожний запуск mapStateToProps
+  console.log('mapStateToProps PROFILE');
+
+  return ({
+    // запит у state значення profile
+    profile: state.profilePage.profile,
+    status: state.profilePage.status,
+    authorizedUserId: state.auth.userId,
+    isAuth: state.auth.isAuth
+  })
+}
 
 // слої поверх ProfileContainer, починаючи з низу: withAuthRedirect, withRouter, connect
 export default compose(
