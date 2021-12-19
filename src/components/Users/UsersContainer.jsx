@@ -19,6 +19,10 @@ class UsersContainer extends React.Component {
     }
 
     render() {
+
+        // вивести в консоль кожний запуск mapStateToProps; урок 82
+        console.log('RENDER USERS')
+
         return <>
             {this.props.isFetching ? <Preloader /> : null}
             <Users
@@ -36,6 +40,10 @@ class UsersContainer extends React.Component {
 }
 
 let mapStateToProps = (state) => {
+
+    // вивести в консоль кожний запуск mapStateToProps; урок 82
+    console.log('mapStateToProps USERS');
+
     return {
         // прокидуємо з users-selectors.js
         users: getUsers(state),
