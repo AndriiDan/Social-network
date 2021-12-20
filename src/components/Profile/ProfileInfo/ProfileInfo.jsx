@@ -2,6 +2,7 @@ import React from 'react';
 import Preloader from '../../common/Preloader/Preloader';
 import s from './ProfileInfo.module.css';
 import ProfileStatus from './ProfileStatus';
+import ProfileStatusWithHooks from './ProfileStatusWithHooks';
 
 const ProfileInfo = (props) => {
   // якщо не props.profile, то відобразить крутилку
@@ -18,7 +19,7 @@ const ProfileInfo = (props) => {
         <img src={props.profile.photos.large} />
 
         {/* відобразити статус конкретного користувача (з сервера) */}
-        <ProfileStatus status={props.status} updateStatus={props.updateStatus} />
+        <ProfileStatusWithHooks status={props.status} updateStatus={props.updateStatus} />
 
         <div>Про мене: {props.profile.aboutMe}</div>
         <div>Мої контакти:
