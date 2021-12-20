@@ -26,6 +26,11 @@ const ProfileStatusWithHooks = (props) => {
         setStatus(e.currentTarget.value);
     }
 
+    // виділення тексту в input при doubleClick по status
+    const handleFocus = (event) => {
+        event.target.select()
+    }
+
     return (
         <div>
             {/* якщо editMode = false, то показати span */}
@@ -39,7 +44,7 @@ const ProfileStatusWithHooks = (props) => {
             { editMode &&
                 <div>
                     {/* при onBlur відображає span */}
-                    <input autoFocus={true} onBlur={deactivateEditMode} onChange={onStatusChange} value={status} />
+                    <input autoFocus={true} onBlur={deactivateEditMode} onChange={onStatusChange} value={status} onFocus={handleFocus} />
                 </div>
             }
         </div >
