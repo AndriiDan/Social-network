@@ -3,26 +3,35 @@ import s from './ProfileInfo.module.css';
 
 const ProfileStatusWithHooks = (props) => {
 
-    // створимо локальний стейт. useState повертає масив з двома елементами [0, 1]
-    let stateWithSetState = useState(false);
-    // перший елемент масиву [0] - значення editMode. Значення зберігається в React
-    let editMode = stateWithSetState[0];
-    // другий елемент масиву [1] - функція, яка змінює одиночне значення editMode
-    let setEditMode = stateWithSetState[1];
+    let [editMode, setEditMode] = useState(false);
+
+    // при doubleClick змінить editMode на true  - відобразить input
+    const activateEditMode = () => {
+        setEditMode(true);
+    }
+
+    // при onBlur (знати фокус з input) змінить editMode на false - відобразить span (state)
+    const deactivateEditMode = () => {
+        setEditMode(false);
+    }
 
     return (
         <div>
             {/* якщо editMode = false, то показати span */}
             { !editMode &&
                 <div>
-                    <span>Status: {props.status || "-----"}</span>
+                    {/* при onDoubleClick відображає input */}
+                    <span onDoubleClick={activateEditMode}>Status: {props.status || "-----"}</span>
                 </div>
             }
             {/* якщо editMode = true, то показати input */}
             { editMode &&
-                <input autoFocus={true} />
+                <div>
+                    {/* при onBlur відображає span */}
+                    <input autoFocus={true} onBlur={deactivateEditMode} />
+                </div>
             }
-        </div>
+        </div >
     )
 }
 
