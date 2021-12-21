@@ -12,7 +12,8 @@ const ProfileStatusWithHooks = (props) => {
     // HOOK виконує функцію після відмалювання компоненти
     useEffect(() => {
         setStatus(props.status);
-    })
+        // залежність від props.status. При зміні props.status повторно виконати useEffect
+    }, [props.status])
 
     // при doubleClick змінить editMode на true  - відобразить input
     const activateEditMode = () => {
