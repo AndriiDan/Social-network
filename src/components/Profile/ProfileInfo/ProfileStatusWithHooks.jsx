@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import s from './ProfileInfo.module.css';
 
 const ProfileStatusWithHooks = (props) => {
@@ -8,6 +8,11 @@ const ProfileStatusWithHooks = (props) => {
 
     // HOOK для зміни статуса
     let [status, setStatus] = useState(props.status);
+
+    // HOOK виконує функцію після відмалювання компоненти
+    useEffect(() => {
+        setStatus(props.status);
+    })
 
     // при doubleClick змінить editMode на true  - відобразить input
     const activateEditMode = () => {
