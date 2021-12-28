@@ -42,7 +42,7 @@ const ProfileStatusWithHooks = (props) => {
             {/* якщо editMode = false, то показати span */}
             { !editMode &&
                 <div>
-                    {/* при onDoubleClick відображає input */}
+                    {/* при onDoubleClick відображає input; '||' означає 'АБО' = {props.status || "-----"} */}
                     <span onDoubleClick={activateEditMode}>Status: {props.status || "-----"}</span>
                 </div>
             }

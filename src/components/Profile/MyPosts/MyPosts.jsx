@@ -5,24 +5,30 @@ import { Textarea } from '../../common/FormsControls/FormsControls';
 import s from './MyPosts.module.css';
 import Post from './Post/Post';
 
-const MyPosts = (props) => {
-  // Створює новий масив з постів
-  let postsElement = props.posts.map(p => <Post message={p.message} likesCount={p.likesCount} />)
-
-  // Функція, яка додає пост
-  let onAddPost = (values) => {
-    props.addPost(values.newPostText);
+class MyPosts extends React.Component {
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    console.log("componentDidUpdate")
   }
+  render() {
+    console.log("RENDER MyPosts");
+    // Створює новий масив з постів
+    let postsElement = this.props.posts.map(p => <Post message={p.message} likesCount={p.likesCount} />)
 
-  return <div className={s.content}>
-    <div className={s.postsBlock}>
-      <h3>My posts</h3>
-      <AddNewPostFormRedux onSubmit={onAddPost} />
-      <div className={s.posts}>
-        {postsElement}
+    // Функція, яка додає пост
+    let onAddPost = (values) => {
+      this.props.addPost(values.newPostText);
+    }
+
+    return <div className={s.content}>
+      <div className={s.postsBlock}>
+        <h3>My posts</h3>
+        <AddNewPostFormRedux onSubmit={onAddPost} />
+        <div className={s.posts}>
+          {postsElement}
+        </div>
       </div>
     </div>
-  </div>
+  }
 }
 
 // константа для максимальної довжини в 10 символів 

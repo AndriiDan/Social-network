@@ -34,7 +34,7 @@ class ProfileContainer extends React.Component {
   render() {
 
     // вивести в консоль кожний запуск mapStateToProps; урок 82
-    console.log('RENDER PROFILE')
+    // console.log('RENDER PROFILE')
 
     return (
       <div>
@@ -47,7 +47,7 @@ class ProfileContainer extends React.Component {
 let mapStateToProps = (state) => {
 
   // вивести в консоль кожний запуск mapStateToProps; урок 82
-  console.log('mapStateToProps PROFILE');
+  // console.log('mapStateToProps PROFILE');
 
   return ({
     // запит у state значення profile
