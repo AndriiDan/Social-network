@@ -1,22 +1,18 @@
-import React from 'react';
+import React, { PureComponent } from 'react';
 import { Field, reduxForm } from 'redux-form';
 import { maxLengthCreator, required } from '../../../utils/validators/validators';
 import { Textarea } from '../../common/FormsControls/FormsControls';
 import s from './MyPosts.module.css';
 import Post from './Post/Post';
 
-class MyPosts extends React.Component {
+// всередині PureComponent вже вмонтований shouldComponentUpdate (для порівняння props і state - чи перемальовувати компоненту) 
+class MyPosts extends PureComponent {
 
   // через 3 сек змінити стейт
   componentDidMount() {
     setTimeout(() => {
       this.setState({ a: 12 })
     }, 3000)
-  }
-
-  // чи обновляти компоненту MyPosts; || - або 
-  shouldComponentUpdate(nextProps, nextState) {
-    return nextProps != this.Props || nextState != this.state
   }
 
   render() {
