@@ -6,9 +6,19 @@ import s from './MyPosts.module.css';
 import Post from './Post/Post';
 
 class MyPosts extends React.Component {
-  componentDidUpdate(prevProps, prevState, snapshot) {
-    console.log("componentDidUpdate")
+
+  // через 3 сек змінити стейт
+  componentDidMount() {
+    setTimeout(() => {
+      this.setState({ a: 12 })
+    }, 3000)
   }
+
+  // чи обновляти компоненту MyPosts; || - або 
+  shouldComponentUpdate(nextProps, nextState) {
+    return nextProps != this.Props || nextState != this.state
+  }
+
   render() {
     console.log("RENDER MyPosts");
     // Створює новий масив з постів
