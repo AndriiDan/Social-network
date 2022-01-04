@@ -4,6 +4,7 @@ import { profileAPI, usersAPI } from "../api/api";
 const ADD_POST = 'ADD-POST';
 const SET_USER_PROFILE = 'SET_USER_PROFILE';
 const SET_STATUS = 'SET_STATUS';
+const DELETE_POST = 'DELETE_POST';
 
 // Для першого запуску profileReducer
 let initialState = {
@@ -48,6 +49,9 @@ export const setUserProfile = (profile) => ({
 })
 export const setStatus = (status) => ({
     type: SET_STATUS, status
+})
+export const deletePost = (userId) => ({
+    type: DELETE_POST, userId
 })
 
 
