@@ -8,7 +8,7 @@ let state = {
     ]
 };
 
-
+// довжина масива постів повинна збільшитися
 it('length posts should be increment', () => {
 
     // 1. test data; вхідні дані
@@ -21,7 +21,7 @@ it('length posts should be increment', () => {
     expect(newState.posts.length).toBe(3);
 });
 
-
+// текст поста повинен бути коректним
 it('message of new posts should be correct', () => {
 
     // 1. test data; вхідні дані
@@ -34,6 +34,7 @@ it('message of new posts should be correct', () => {
     expect(newState.posts[2].message).toBe("it-kamasutra.com");
 });
 
+// після видалення поста довжина масива постів повинна зменшитися
 it('after deleting length of messages should be decrement', () => {
 
     // 1. test data; вхідні дані
@@ -44,5 +45,19 @@ it('after deleting length of messages should be decrement', () => {
 
     // 3. expectation; очікуємо, що length стане 1
     expect(newState.posts.length).toBe(1);
+
+});
+
+// після видалення некоректного id поста довжина масива постів не повинна змінитися
+it(`after deleting length shouldn't be decrement if id is incorrect`, () => {
+
+    // 1. test data; вхідні дані
+    let action = deletePost(1000);
+
+    // 2. action; провести тест
+    let newState = profileReducer(state, action);
+
+    // 3. expectation; очікуємо, що length стане 1
+    expect(newState.posts.length).toBe(2);
 
 });
