@@ -33,3 +33,13 @@ it('message of new posts should be correct', () => {
     // 3. expectation; очікуємо, що length стане 3
     expect(newState.posts[2].message).toBe("it-kamasutra.com");
 });
+
+it('after deleting length of messages should be decrement', () => {
+
+    // 1. test data; вхідні дані
+    let action = deletePost(1);
+
+    // 2. action; провести тест
+    let newState = profileReducer(state, action);
+
+});
