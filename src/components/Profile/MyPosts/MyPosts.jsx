@@ -10,7 +10,7 @@ const MyPosts = React.memo((props) => {
 
   console.log("RENDER MyPosts");
   // Створює новий масив з постів
-  let postsElement = props.posts.map(p => <Post message={p.message} likesCount={p.likesCount} />)
+  let postsElement = [...props.posts].reverse().map(p => <Post message={p.message} likesCount={p.likesCount} />)
 
   // Функція, яка додає пост
   let onAddPost = (values) => {
