@@ -35,6 +35,8 @@ const profileReducer = (state = initialState, action) => {
             return { ...state, profile: action.profile }
         case SET_STATUS:
             return { ...state, status: action.status }
+        case DELETE_POST:
+            return { ...state, posts: state.posts.filter(p => p.id != action.userId) }
         default:
             return state;
     }
@@ -50,6 +52,7 @@ export const setUserProfile = (profile) => ({
 export const setStatus = (status) => ({
     type: SET_STATUS, status
 })
+// видалити пост
 export const deletePost = (userId) => ({
     type: DELETE_POST, userId
 })
