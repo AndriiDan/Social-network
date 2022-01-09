@@ -1,4 +1,5 @@
 const SEND_MESSAGE = 'SEND_MESSAGE';
+const DELETE_MESSAGE = 'DELETE_MESSAGE';
 
 let initialState = {
     dialogs: [
@@ -28,6 +29,8 @@ const dialogsReducer = (state = initialState, action) => {
                 // створюю копію messages і додаю в кінець нове повідомлення (аналогічно як push)
                 messages: [...state.messages, { id: 4, message: body }],
             };
+        case DELETE_MESSAGE:
+            return { ...state, messages: state.messages.filter(m => m.id != action.messageId) }
         default:
             return state;
     }
@@ -37,6 +40,9 @@ const dialogsReducer = (state = initialState, action) => {
 export const sendMessageCreator = (newMessageBody) => ({
     // newMessageBody - це action
     type: SEND_MESSAGE, newMessageBody
+})
+export const deleteMessage = (messageId) => ({
+    type: DELETE_MESSAGE, messageId
 })
 
 export default dialogsReducer;

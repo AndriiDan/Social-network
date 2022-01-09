@@ -1,5 +1,5 @@
 import React from "react";
-import dialogsReducer, { sendMessageCreator } from "./dialogs-reducer";
+import dialogsReducer, { deleteMessage, sendMessageCreator } from "./dialogs-reducer";
 
 let state = {
     messages: [
@@ -9,6 +9,7 @@ let state = {
     ]
 }
 
+// test для додавання повідомлення
 it('length messages should be incrementted', () => {
 
     // 1. test data
@@ -21,7 +22,8 @@ it('length messages should be incrementted', () => {
     expect(newState.messages.length).toBe(4);
 })
 
-it('message of new message should be corect', () => {
+// test для перевірки коректності повідомлення
+it('message of new message should be correct', () => {
 
     // 1. test data
     let action = sendMessageCreator("new message");
@@ -31,4 +33,18 @@ it('message of new message should be corect', () => {
 
     // 3. expectation
     expect(newState.messages[3].message).toBe("new message");
+})
+
+// test для видалення повідомлення; довжина масива messages повинна зменшитися
+it("after deleting length of messages should be decrement", () => {
+    let action = deleteMessage(1);
+    let newState = dialogsReducer(state, action);
+    expect(newState.messages.length).toBe(2);
+})
+
+// test для некоректного Id
+it("after deleting length shouldn't be decrement if id is incorrect", () => {
+    let action = deleteMessage(1000);
+    let newState = dialogsReducer(state, action);
+    expect(newState.messages.length).toBe(3);
 })
