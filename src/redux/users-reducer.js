@@ -29,9 +29,6 @@ let initialState = {
 const usersReducer = (state = initialState, action) => {
     switch (action.type) {
 
-        // фейкове значення для перевірки урок 82
-        case "FAKE": return { ...state, fake: state.fake + 1 };
-
         case FOLLOW:
             return {
                 ...state,
@@ -121,72 +118,43 @@ export const toggleFollowingProgress = (isFetching, userId) => ({
 
 // ThunkCreator
 export const requestUsers = (page, pageSize) => {
-    return (dispatch) => {
+    return async (dispatch) => {
         // для відображення анімації при відправленні запиту
         dispatch(toggleIsFetching(true));
         // відображати активний номер сторінки користувачів
         dispatch(setCurrentPage(page));
 
         // getUsers - get-запит
-        usersAPI.getUsers(page, pageSize)
-            .then(data => {
-                // для завершення відображення анімації після запиту 
-                dispatch(toggleIsFetching(false));
-                // засетити users
-                dispatch(setUsers(data.items));
-                // засетити загальну к-сть юзерів
-                dispatch(setTotalUsersCount(data.totalCount));
-            });
+        const data = await usersAPI.getUsers(page, pageSize);
+        // для завершення відображення анімації після запиту 
+        dispatch(toggleIsFetching(false));
+        // засетити users
+        dispatch(setUsers(data.items));
+        // засетити загальну к-сть юзерів
+        dispatch(setTotalUsersCount(data.totalCount));
     }
 }
 
 export const follow = (userId) => {
-    return (dispatch) => {
+    return async (dispatch) => {
         dispatch(toggleFollowingProgress(true, userId));
-        usersAPI.follow(userId)
-            .then(data => {
-                if (data.resultCode == 0) {
-                    dispatch(followSuccess(userId))
-                };
-                dispatch(toggleFollowingProgress(false, userId));
-            });
+        const data = await usersAPI.follow(userId);
+        if (data.resultCode == 0) {
+            dispatch(followSuccess(userId))
+        };
+        dispatch(toggleFollowingProgress(false, userId));
     }
 }
-
-// axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, {}, {
-//     withCredentials: true,
-//     headers: {
-//         "API-KEY": "86e5f8fb-0fbf-4804-b46b-33ed56eeeec0"
-//     }
-// }).
-//     then(response => {
-//         if (response.data.resultCode == 0) {
-//             props.follow(u.id)
-//         }
-
 
 export const unfollow = (userId) => {
-    return (dispatch) => {
+    return async (dispatch) => {
         dispatch(toggleFollowingProgress(true, userId));
-        usersAPI.unfollow(userId)
-            .then(data => {
-                if (data.resultCode == 0) {
-                    dispatch(unfollowSuccess(userId))
-                };
-                dispatch(toggleFollowingProgress(false, userId));
-            });
+        const data = await usersAPI.unfollow(userId);
+        if (data.resultCode == 0) {
+            dispatch(unfollowSuccess(userId))
+        };
+        dispatch(toggleFollowingProgress(false, userId));
     }
 }
-
-// axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, {
-//     withCredentials: true,
-//     headers: {
-//         "API-KEY": "86e5f8fb-0fbf-4804-b46b-33ed56eeeec0"
-//     }
-// }).
-//     then(response => {
-//         if (response.data.resultCode == 0) {
-//             props.unfollow(u.id)
-//         }
 
 export default usersReducer;
