@@ -59,36 +59,35 @@ export const deletePost = (userId) => ({
 
 
 // thunk для конкретного користувача
-export const getUserProfile = (userId) => (dispatch) => {
+export const getUserProfile = (userId) => async (dispatch) => {
+    // async - await - асинхронно (замість .then)
     // запит на сервер з api.is
-    usersAPI.getProfile(userId)
-        .then(response => {
-            // засетити userProfile з сервера
-            dispatch(setUserProfile(response.data));
-        });
+    const response = await usersAPI.getProfile(userId);
+    // засетити userProfile з сервера
+    dispatch(setUserProfile(response.data));
 }
 
 // thunk для отримання статуса конкретного користувача
-export const getStatus = (userId) => (dispatch) => {
+export const getStatus = (userId) => async (dispatch) => {
+    // async - await - асинхронно (замість .then)
     // запит на сервер з api.is для отримання статуса
-    profileAPI.getStatus(userId)
-        .then(response => {
-            // засетити status з сервера
-            dispatch(setStatus(response.data))
-        })
+    const response = await profileAPI.getStatus(userId);
+    // засетити status з сервера
+    dispatch(setStatus(response.data))
 }
 
 // thunk для оновлення статуса конкретного користувача
-export const updateStatus = (status) => (dispatch) => {
+export const updateStatus = (status) => async (dispatch) => {
+    // async - await - асинхронно (замість .then)
     // надіслати на сервер статус з текстом(статусом)
-    profileAPI.updateStatus(status)
-        .then(response => {
-            // якщо з сервера прийде відповідь "0" (все добре)
-            if (response.data.resultCode === 0) {
-                // засетити status 
-                dispatch(setStatus(status))
-            }
-        })
+    const response = await profileAPI.updateStatus(status);
+    // якщо з сервера прийде відповідь "0" (все добре)
+    if (response.data.resultCode === 0) {
+        // засетити status 
+        // засетити status 
+        // засетити status 
+        dispatch(setStatus(status))
+    }
 }
 
 export default profileReducer;
