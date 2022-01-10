@@ -135,25 +135,29 @@ export const requestUsers = (page, pageSize) => {
     }
 }
 
+// метод, в який винесено спільне для follow та unfollow
+const followUnfollowFlow = async (dispatch, userId, apiMethod, actionCreator) => {
+    dispatch(toggleFollowingProgress(true, userId));
+    const data = await apiMethod(userId);
+    if (data.resultCode == 0) {
+        dispatch(actionCreator(userId))
+    };
+    dispatch(toggleFollowingProgress(false, userId));
+}
+
 export const follow = (userId) => {
     return async (dispatch) => {
-        dispatch(toggleFollowingProgress(true, userId));
-        const data = await usersAPI.follow(userId);
-        if (data.resultCode == 0) {
-            dispatch(followSuccess(userId))
-        };
-        dispatch(toggleFollowingProgress(false, userId));
+        const apiMethod = usersAPI.follow.bind(usersAPI);
+        const actionCreator = followSuccess;
+        followUnfollowFlow(dispatch, userId, apiMethod, actionCreator);
     }
 }
 
 export const unfollow = (userId) => {
     return async (dispatch) => {
-        dispatch(toggleFollowingProgress(true, userId));
-        const data = await usersAPI.unfollow(userId);
-        if (data.resultCode == 0) {
-            dispatch(unfollowSuccess(userId))
-        };
-        dispatch(toggleFollowingProgress(false, userId));
+        const apiMethod = usersAPI.unfollow.bind(usersAPI);
+        const actionCreator = unfollowSuccess;
+        followUnfollowFlow(dispatch, userId, apiMethod, actionCreator);
     }
 }
 
