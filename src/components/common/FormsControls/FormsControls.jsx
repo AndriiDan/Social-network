@@ -1,4 +1,5 @@
 import React from 'react';
+import { Field } from 'redux-form';
 import styles from './FormsControls.module.css';
 
 // ({ input, meta, ...props }) деструкторизація props. В ...props відсутні input, meta.
@@ -33,3 +34,14 @@ export const Input = (props) => {
         <FormControl {...props}><input {...input} {...restProps} /></FormControl>
     )
 }
+
+export const createField = (placeholder, name, validators, component, props = {}, text = "") => (
+    // Field замість input, щоб form реагувала на onChange 
+    // validate={required} - поле повинно бути заповнено 
+    //         component={Input} - компонент форми Input 
+    // {...props} - деструктуризація буде заганяти далі
+    <div>
+        <Field placeholder={placeholder} name={name}
+            validate={validators} component={component} {...props} />{text}
+    </div>
+)

@@ -1,29 +1,23 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
-import { Field, reduxForm } from 'redux-form';
+import { reduxForm } from 'redux-form';
 import { login } from '../../redux/auth-reducer';
 import { required } from '../../utils/validators/validators';
-import { Input } from '../common/FormsControls/FormsControls';
+import { createField, Input } from '../common/FormsControls/FormsControls';
 import style from '../common/FormsControls/FormsControls.module.css'
 
 const LoginForm = ({ handleSubmit, error }) => {
     // {props.handleSubmit} приходять з reduxForm "під капотом"
     return <form onSubmit={handleSubmit}>
-        <div>
-            {/* Field замість input, щоб form реагувала на onChange */}
-            {/* validate={required} - поле повинно бути заповнено 
-            component={Input} - компонент форми Input */}
-            <Field placeholder={"Email"} name={"email"}
-                validate={required} component={Input} />
-        </div>
-        <div>
-            <Field placeholder={"Password"} name={"password"}
-                validate={required} component={Input} type={"password"} />
-        </div>
-        <div>
-            <Field type={"checkbox"} name={"rememberMe"} component={"input"} /> remember me
-        </div>
+        {/* Поле вводу для Email. Field замість input, щоб form реагувала на onChange */}
+        {createField("Email", "email", [required], Input)}
+
+        {/* Поле вводу для Password */}
+        {createField("Password", "password", [required], Input, { type: "password" })}
+
+        {/* Поле вводу для галочки rememberMe */}
+        {createField(null, "rememberMe", [], Input, { type: "checkbox" }, "remember me")}
 
         {/* відображення помилки вводу email або password */}
         {error && <div className={style.formSummeryError}>
