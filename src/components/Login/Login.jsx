@@ -7,9 +7,9 @@ import { required } from '../../utils/validators/validators';
 import { Input } from '../common/FormsControls/FormsControls';
 import style from '../common/FormsControls/FormsControls.module.css'
 
-const LoginForm = (props) => {
+const LoginForm = ({ handleSubmit, error }) => {
     // {props.handleSubmit} приходять з reduxForm "під капотом"
-    return <form onSubmit={props.handleSubmit}>
+    return <form onSubmit={handleSubmit}>
         <div>
             {/* Field замість input, щоб form реагувала на onChange */}
             {/* validate={required} - поле повинно бути заповнено 
@@ -26,8 +26,8 @@ const LoginForm = (props) => {
         </div>
 
         {/* відображення помилки вводу email або password */}
-        {props.error && <div className={style.formSummeryError}>
-            {props.error}
+        {error && <div className={style.formSummeryError}>
+            {error}
         </div>
         }
 
@@ -39,16 +39,16 @@ const LoginForm = (props) => {
 
 const LoginReduxform = reduxForm({ form: 'login' })(LoginForm)
 
-const Login = (props) => {
+const Login = ({ login, isAuth }) => {
     // функція, в яку приходять дані з форми. formData - це об'єкт з даними, які були заповнені у form
     const onSubmit = (formData) => {
         // props.login - це callback повернутий connect(ом) після (під час) оброблення thunk{login}
         // з formData дістаємо email, password, rememberMe
-        props.login(formData.email, formData.password, formData.rememberMe);
+        login(formData.email, formData.password, formData.rememberMe);
     }
 
     // якщо в props є isAuth=true, то Redirect на сторінку Profile
-    if (props.isAuth) {
+    if (isAuth) {
         return <Redirect to={"/profile"} />
     }
 
