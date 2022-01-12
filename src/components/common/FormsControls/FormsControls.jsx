@@ -3,18 +3,18 @@ import { Field } from 'redux-form';
 import styles from './FormsControls.module.css';
 
 // ({ input, meta, ...props }) деструкторизація props. В ...props відсутні input, meta.
-export const FormControl = ({ input, meta, ...props }) => {
+export const FormControl = ({ input, meta: { touched, error }, children, ...props }) => {
     // умова помилки: якщо була взаємодія з елементом і є помилка (умава валідації)
-    const hasError = meta.touched && meta.error;
+    const hasError = touched && error;
     return (
         // додає стилі. (hasError ? styles.error : "") - якщо виконується умова помилки, додати styles.error, якщо ні - додати пустий рядок
         <div className={styles.formControl + " " + (hasError ? styles.error : "")}>
             <div>
                 {/* підставляє Textarea, Input */}
-                {props.children}
+                {children}
             </div>
             {/* якщо виконується умова помилки, показати span. Текст помилки міститься в  meta.error */}
-            { hasError && <span>{meta.error}</span>}
+            { hasError && <span>{error}</span>}
         </div>
     )
 }
