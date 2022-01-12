@@ -1,36 +1,15 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import { usersAPI } from "../../api/api";
 import userPhoto from "../../assets/images/user.png";
+import Paginator from "../common/Paginator/Paginator";
 import styles from "./Users.module.css";
 
-let Users = (props) => {
-
-    // інформація, про загальну к-сть сторінок
-    let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
-
-    // створюємо масив сторінок
-    let pages = [];
-    // формуємо масив сторінок
-    for (let i = 1; i <= pagesCount; i++) {
-        pages.push(i);
-    }
-
+let Users = (totalUsersCount, pageSize, currentPage, onPageChanged, users, ...props) => {
     return <div>
-        <div>
-            {/* сформовуємо рядок з номерацією сторінок */}
-            {pages.map(p => {
-                return <span
-                    // виділяє активну сторінку
-                    className={props.currentPage === p && styles.selectedPage}
-                    // перемикає сторінку з юзерами
-                    onClick={() => { props.onPageChanged(p) }}>
-                    {p}
-                </span>
-            })}
-        </div>
+        {/* Відображення номерів сторінок з Users */}
+        <Paginator totalUsersCount={totalUsersCount} pageSize={pageSize} currentPage={currentPage} onPageChanged={onPageChanged} />
         {
-            props.users.map(u =>
+            users.map(u =>
                 <div key={u.id}>
 
                     <span>
