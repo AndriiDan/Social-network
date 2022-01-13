@@ -1,49 +1,19 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
-import userPhoto from "../../assets/images/user.png";
 import Paginator from "../common/Paginator/Paginator";
-import styles from "./Users.module.css";
+import User from "./User";
 
-let Users = ({totalUsersCount, pageSize, currentPage, onPageChanged, users, ...props}) => {
+let Users = ({ totalUsersCount, pageSize, currentPage, onPageChanged, users, ...props }) => {
     return <div>
         {/* Відображення номерів сторінок з Users */}
         <Paginator totalUsersCount={totalUsersCount} pageSize={pageSize} currentPage={currentPage} onPageChanged={onPageChanged} />
-        {
-            users.map(u =>
-                <div key={u.id}>
-
-                    <span>
-                        <div>
-                            <NavLink to={'/profile/' + u.id}>
-                                <img src={u.photos.small != null ? u.photos.small : userPhoto} className={styles.userPhoto} />
-                            </NavLink>
-                        </div>
-                        <div>
-                            {u.followed
-                                ? <button
-                                    disabled={props.followingInProgress.some(id => id === u.id)}
-                                    onClick={() => { props.unfollow(u.id); }}>
-                                    Unfollow</button>
-                                : <button
-                                    disabled={props.followingInProgress.some(id => id === u.id)}
-                                    onClick={() => { props.follow(u.id); }}>
-                                    Follow</button>
-                            }
-
-                        </div>
-                    </span>
-                    <span>
-                        <span>
-                            <div>{u.name}</div>
-                            <div>{u.status}</div>
-                        </span>
-                        <span>
-                            <div>{"u.location.country"}</div>
-                            <div>{"u.location.city"}</div>
-                        </span>
-                    </span>
-                </div>)
-        }
+        <div>
+            {
+                users.map(u =>
+                    // відображення конкретного юзера
+                    <User user={u} key={u.id} followingInProgress={props.followingInProgress} unfollow={props.unfollow} follow={props.follow} />
+                )
+            }
+        </div>
 
     </div>
 
