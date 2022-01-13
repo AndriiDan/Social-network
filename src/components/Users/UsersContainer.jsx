@@ -10,19 +10,18 @@ import { getCurrentPage, getFollowingInProgress, getIsFetching, getPageSize, get
 class UsersContainer extends React.Component {
 
     componentDidMount() {
-        this.props.requestUsers(this.props.currentPage, this.props.pageSize);
+        // деструктуризація props(ів)
+        const { currentPage, pageSize } = this.props;
+        this.props.requestUsers(currentPage, pageSize);
     }
 
     // метод, для обробника подій onClick - для зміни номера сторінки users, + запит на сервер 
     onPageChanged = (pageNumber) => {
-        this.props.requestUsers(pageNumber, this.props.pageSize);
+        const { pageSize } = this.props
+        this.props.requestUsers(pageNumber, pageSize);
     }
 
     render() {
-
-        // вивести в консоль кожний запуск mapStateToProps; урок 82
-        console.log('RENDER USERS')
-
         return <>
             {this.props.isFetching ? <Preloader /> : null}
             <Users
@@ -40,10 +39,6 @@ class UsersContainer extends React.Component {
 }
 
 let mapStateToProps = (state) => {
-
-    // вивести в консоль кожний запуск mapStateToProps; урок 82
-    console.log('mapStateToProps USERS');
-
     return {
         // прокидуємо з users-selectors.js
         users: getUsers(state),
