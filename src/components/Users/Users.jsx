@@ -4,7 +4,7 @@ import userPhoto from "../../assets/images/user.png";
 import Paginator from "../common/Paginator/Paginator";
 import styles from "./Users.module.css";
 
-let Users = (totalUsersCount, pageSize, currentPage, onPageChanged, users, ...props) => {
+let Users = ({totalUsersCount, pageSize, currentPage, onPageChanged, users, ...props}) => {
     return <div>
         {/* Відображення номерів сторінок з Users */}
         <Paginator totalUsersCount={totalUsersCount} pageSize={pageSize} currentPage={currentPage} onPageChanged={onPageChanged} />

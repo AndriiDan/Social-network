@@ -2,7 +2,7 @@ import React from "react";
 import styles from "./Paginator.module.css";
 
 // Відображення номерів сторінок
-let Paginator = (totalUsersCount, pageSize, currentPage, onPageChanged) => {
+let Paginator = ({ totalUsersCount, pageSize, currentPage, onPageChanged }) => {
 
     // інформація, про загальну к-сть сторінок
     let pagesCount = Math.ceil(totalUsersCount / pageSize);
