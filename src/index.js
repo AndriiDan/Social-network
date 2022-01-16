@@ -8,11 +8,6 @@ import { BrowserRouter } from 'react-router-dom';
 // import { Provider } from './StoreContext';
 import { Provider } from "react-redux";
 
-// виконувати диспатч кожну секунду; для перевірки урок 82
-setInterval(() => {
-    store.dispatch({ type: "FAKE" })
-}, 1000)
-
 ReactDOM.render(
     <React.StrictMode>
         {/* Все, що в середині BrowserRouter може переключатися (підключати різні зсилки, змінювати url) без перезавантаження сторінки */}
