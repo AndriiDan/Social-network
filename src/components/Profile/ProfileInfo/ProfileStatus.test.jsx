@@ -9,4 +9,12 @@ describe("ProfileStatus component", () => {
         const instance = component.getInstance();
         expect(instance.state.status).toBe("it-kamasutra.com");
     });
+
+    // test: <span> повинен бути відображеним
+    test("after creation <span> should be displayed", () => {
+        const component = create(<ProfileStatus status="it-kamasutra.com" />);
+        const root = component.root;
+        const span = root.findByType("span");
+        expect(span).not.toBeNull();
+    });
 })
