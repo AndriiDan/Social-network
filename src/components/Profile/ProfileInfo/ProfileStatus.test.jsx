@@ -26,4 +26,13 @@ describe("ProfileStatus component", () => {
             const input = root.findByType("input");
         }).toThrow();
     });
+
+    // test: в <span> повинен відображатися коректний статус
+    test("after creation <span> should contains correct status", () => {
+        const component = create(<ProfileStatus status="it-kamasutra.com" />);
+        const root = component.root;
+        const span = root.findByType("span");
+        // children - те, що в середині елемента <span> в ProfileStatus.jsx
+        expect(span.children[1]).toBe("it-kamasutra.com");
+    });
 })
