@@ -17,4 +17,13 @@ describe("ProfileStatus component", () => {
         const span = root.findByType("span");
         expect(span).not.toBeNull();
     });
+
+    // test: <input> не повинен бути відображеним; тест - повинна бути помилка (toThrow)
+    test("after creation <input> shouldn't be displayed", () => {
+        const component = create(<ProfileStatus status="it-kamasutra.com" />);
+        const root = component.root;
+        expect(() => {
+            const input = root.findByType("input");
+        }).toThrow();
+    });
 })
