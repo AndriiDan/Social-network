@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route, withRouter } from 'react-router-dom';
+import { BrowserRouter, Route, withRouter } from 'react-router-dom';
 import './App.css';
 import Music from './components/Music/Music';
 import Navbar from './components/Navbar/Navbar';
@@ -15,6 +15,8 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { initializeApp } from './redux/app-reducer';
 import Preloader from './components/common/Preloader/Preloader';
+import { Provider } from 'react-redux';
+import store from "./redux/redux-store";
 
 class App extends React.Component {
 
@@ -64,7 +66,17 @@ const mapDispatchToProps = (state) => ({
     initialized: state.app.initialized
 })
 
-export default compose(
+let AppContainer = compose(
     // при використанні Route і connect додатково краще обернути withRouter, тому що інколи збиваються роути
     withRouter,
     connect(mapDispatchToProps, { initializeApp }))(App);
+
+// для проходження теста урок 92 створив контейнери AppContainer, SamuraiJSApp над App
+const SamuraiJSApp = (props) => {
+    return <BrowserRouter>
+        <Provider store={store}>
+            <AppContainer />
+        </Provider>
+    </BrowserRouter>
+}
+export default SamuraiJSApp;
