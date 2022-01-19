@@ -14,7 +14,7 @@ const TOGGLE_IS_FOLLOWING_PROGRESS = 'TOGGLE_IS_FOLLOWING_PROGRESS';
 let initialState = {
     users: [],
     // к-сть юзерів на сторінці 
-    pageSize: 5,
+    pageSize: 10,
     // загальну к-сть юзерів
     totalUsersCount: 0,
     // текуча сторінка

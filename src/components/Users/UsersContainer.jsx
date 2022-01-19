@@ -17,7 +17,7 @@ class UsersContainer extends React.Component {
 
     // метод, для обробника подій onClick - для зміни номера сторінки users, + запит на сервер 
     onPageChanged = (pageNumber) => {
-        const { pageSize } = this.props
+        const { pageSize } = this.props;
         this.props.requestUsers(pageNumber, pageSize);
     }
 
