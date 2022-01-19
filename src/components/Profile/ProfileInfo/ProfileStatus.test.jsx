@@ -49,4 +49,17 @@ describe("ProfileStatus component", () => {
         // очікувати значення (input.props.value) "it-kamasutra.com"
         expect(input.props.value).toBe("it-kamasutra.com");
     });
+
+    // test: перевіряє, чи був викликаний callback (deactiveteEditMode)
+    test("callback should be called", () => {
+        // спеціальна функція, яка перевіряє чи був викликаний callback
+        const mockCallBack = jest.fn();
+        // ProfileStatus має callback updateStatus (оновити статус), в ного закивуємо ф-цію mockCallback
+        const component = create(<ProfileStatus status="it-kamasutra.com" updateStatus={mockCallBack} />);
+        const instance = component.getInstance();
+        // в компоненті викликаємо імітацію deactivateEditMode() (змінює editMode з false на true - замість input буде span)
+        instance.deactivateEditMode();
+        // дивимося, чи в ф-ції mockCallBack в масиві calls довжина стала 1 - тобто, скільки разів був викликаний updateStatus (1 раз)
+        expect(mockCallBack.mock.calls.length).toBe(1);
+    });
 })
