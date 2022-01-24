@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import styles from "./Paginator.module.css";
+import cn from "classnames";
 
 // Відображення номерів сторінок
 let Paginator = ({ totalItemsCount, pageSize, currentPage, onPageChanged, portionSize = 10 }) => {
@@ -23,7 +24,7 @@ let Paginator = ({ totalItemsCount, pageSize, currentPage, onPageChanged, portio
     // права межа порції
     const rightPortionPageNumber = portionNumber * portionSize;
 
-    return <div>
+    return <div className={styles.paginator}>
         {/* Кнопка - попередня порція юзерів */}
         {portionNumber > 1 &&
             <button onClick={() => { setPortionNumber(portionNumber - 1) }}>PREV</button>
@@ -31,11 +32,12 @@ let Paginator = ({ totalItemsCount, pageSize, currentPage, onPageChanged, portio
 
         {/* сформовуємо рядок з номерацією сторінок */}
         {pages
+            // фільтрує юзерів тільки між лівою і правою межею
             .filter(p => p >= leftPortionPageNumber && p <= rightPortionPageNumber)
             .map((p) => {
                 return <span
                     // виділяє активну сторінку
-                    className={currentPage === p && styles.selectedPage}
+                    className={cn({ [styles.selectedPage]: currentPage === p }, styles.pageNumber)}
                     key={p}
                     // перемикає сторінку з юзерами
                     onClick={(e) => { onPageChanged(p) }}>
@@ -44,9 +46,11 @@ let Paginator = ({ totalItemsCount, pageSize, currentPage, onPageChanged, portio
             })}
 
         {/* Кнопка - наступна порція юзерів */}
-        {portionCount > portionNumber &&
-            <button onClick={() => { setPortionNumber(portionNumber + 1) }}>NEXT</button>}
-    </div>
+        {
+            portionCount > portionNumber &&
+            <button onClick={() => { setPortionNumber(portionNumber + 1) }}>NEXT</button>
+        }
+    </div >
 
 }
 
