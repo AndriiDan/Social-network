@@ -6,8 +6,6 @@ import Navbar from './components/Navbar/Navbar';
 import News from './components/News/News';
 import Settings from './components/Settings/Settings';
 import Friends from './components/Friends/Friends';
-
-import UsersContainer from './components/Users/UsersContainer';
 import ProfileContainer from './components/Profile/ProfileContainer';
 import HeaderContainer from './components/Header/HeaderContainer';
 import Login from './components/Login/Login';
@@ -18,10 +16,9 @@ import Preloader from './components/common/Preloader/Preloader';
 import { Provider } from 'react-redux';
 import store from "./redux/redux-store";
 
-// import DialogsContainer from './components/Dialogs/DialogsContainer';
-
-// Цей компонент завантажується динамічно
+// Ці компонент завантажуються динамічно
 const DialogsContainer = React.lazy(() => import('./components/Dialogs/DialogsContainer'));
+const UsersContainer = React.lazy(() => import('./components/Users/UsersContainer'));
 
 class App extends React.Component {
 
@@ -59,7 +56,12 @@ class App extends React.Component {
                     <Route path='/settings' component={Settings} />
                     <Route
                         path='/users'
-                        render={() => <UsersContainer />} />
+                        render={() => {
+                            // Відображає <Preloader /> поки UsersContainer завантажується
+                            return <React.Suspense fallback={<Preloader />}>
+                                <UsersContainer />
+                            </React.Suspense>
+                        }} />
                     <Route path='/friends' component={Friends} />
                     <Route
                         path='/login'
