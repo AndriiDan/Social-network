@@ -6,7 +6,7 @@ import Navbar from './components/Navbar/Navbar';
 import News from './components/News/News';
 import Settings from './components/Settings/Settings';
 import Friends from './components/Friends/Friends';
-import DialogsContainer from './components/Dialogs/DialogsContainer';
+
 import UsersContainer from './components/Users/UsersContainer';
 import ProfileContainer from './components/Profile/ProfileContainer';
 import HeaderContainer from './components/Header/HeaderContainer';
@@ -17,6 +17,11 @@ import { initializeApp } from './redux/app-reducer';
 import Preloader from './components/common/Preloader/Preloader';
 import { Provider } from 'react-redux';
 import store from "./redux/redux-store";
+
+// import DialogsContainer from './components/Dialogs/DialogsContainer';
+
+// Цей компонент завантажується динамічно
+const DialogsContainer = React.lazy(() => import('./components/Dialogs/DialogsContainer'));
 
 class App extends React.Component {
 
@@ -43,8 +48,12 @@ class App extends React.Component {
                             <ProfileContainer />} />
                     <Route
                         path='/dialogs'
-                        render={() =>
-                            <DialogsContainer />} />
+                        render={() => {
+                            // Відображає 'Loading...' поки DialogsContainer завантажується
+                            return <React.Suspense fallback={<div>Loading...</div>}>
+                                <DialogsContainer />
+                            </React.Suspense>
+                        }} />
                     <Route path='/news' component={News} />
                     <Route path='/music' component={Music} />
                     <Route path='/settings' component={Settings} />
