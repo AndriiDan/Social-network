@@ -15,6 +15,7 @@ import { initializeApp } from './redux/app-reducer';
 import Preloader from './components/common/Preloader/Preloader';
 import { Provider } from 'react-redux';
 import store from "./redux/redux-store";
+import { withSuspense } from './hoc/withSuspense';
 
 // Ці компонент завантажуються динамічно
 const DialogsContainer = React.lazy(() => import('./components/Dialogs/DialogsContainer'));
@@ -45,23 +46,15 @@ class App extends React.Component {
                             <ProfileContainer />} />
                     <Route
                         path='/dialogs'
-                        render={() => {
-                            // Відображає 'Loading...' поки DialogsContainer завантажується
-                            return <React.Suspense fallback={<div>Loading...</div>}>
-                                <DialogsContainer />
-                            </React.Suspense>
-                        }} />
+                        // withSuspense - hoc, який обгортає навколо DialogsContainer <React.Suspense fallback={<div>Loading...</div>}> для lazy loading
+                        render={withSuspense(DialogsContainer)} />
                     <Route path='/news' component={News} />
                     <Route path='/music' component={Music} />
                     <Route path='/settings' component={Settings} />
                     <Route
                         path='/users'
-                        render={() => {
-                            // Відображає <Preloader /> поки UsersContainer завантажується
-                            return <React.Suspense fallback={<Preloader />}>
-                                <UsersContainer />
-                            </React.Suspense>
-                        }} />
+                        // withSuspense - hoc, який обгортає навколо UsersContainer <React.Suspense fallback={<div>Loading...</div>}> для lazy loading
+                        render={withSuspense(UsersContainer)} />
                     <Route path='/friends' component={Friends} />
                     <Route
                         path='/login'
